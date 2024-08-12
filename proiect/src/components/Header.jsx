@@ -16,21 +16,24 @@ function Header() {
             <Box
                 component="nav"
                 sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '0 20px',
-                    backgroundColor: '#f5f5f5',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    // display: 'flex',
+                    // justifyContent: 'space-between',
+                    // alignItems: 'center',
+                    // padding: '0 20px',
+                    // backgroundColor: '#f5f5f5',
+                    // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    // marginTop:'10px'
                 }}
             >
                 <Typography variant="h6">Home Page</Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display:'flex', alignItems: 'center' }}>
                     {userLoggedIn ? (
                         <>
-                            <Typography variant="body1" sx={{ marginRight: '16px' }}>
+                        <div className="hello">
+                            <Typography variant="body1" sx={{ marginRight: '20px',marginLeft:'150px'}}>
                                 Hello, {currentUser.email}
                             </Typography>
+                            </div>
                             <Button
                                 style={{
                                     backgroundColor: "#ed5853",
@@ -80,20 +83,8 @@ function Header() {
                     )}
                 </Box>
             </Box>
-            {!userLoggedIn && (
-                <Box sx={styles.bottomContainer}>
-                    {isLoginPage && (
-                        <Typography variant="body2">
-                            Dacă nu aveți cont, <Link to="/register">Register</Link>
-                        </Typography>
-                    )}
-                    {isRegisterPage && (
-                        <Typography variant="body2">
-                            Aveți cont, <Link to="/login">Login</Link>
-                        </Typography>
-                    )}
-                </Box>
-            )}
+           
+            
         </>
     );
 }
@@ -106,7 +97,7 @@ const styles = {
         transform: 'translateX(-50%)',
         textAlign: 'center',
         padding: '10px',
-        backgroundColor: 'white',
+        backgroundColor: 'cyan',
         width: '100%',
         boxShadow: '0 -1px 10px rgba(0, 0, 0, 0.1)',
     },

@@ -7,6 +7,7 @@ import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
+import '../Home.css';
 
 function Home(){
     const navigate= useNavigate();
@@ -14,37 +15,25 @@ function Home(){
     const [users,setUsers]=useState([]);
     const [isAdmin,setAdmin]=useState(false);
     const [editData, setEditData]= useState({});
-
-    useEffect(() =>{
-        if (!currentUser){
-            navigate('/login');
-        }else {
-            checkAdminStatus();
-            fetchUsers();
-        }
-    },[currentUser,navigate]);
-
-    const fetchUsers = async()=>{
-        const usersCollection = collection(db,"users");
-    }
+    
+    
     return (
-        <div>
+        <div className="homeContainer" >
+            <div className="headercontainer">
             <Header />
-
-            <div className="container">
-                <Button
-                 variant="contained"
-                //  onClick={}
-                 sx={{marginBottom: 2}}
-                >
-
-                </Button>
             </div>
+            
+            <div className="homeContainer_2">
+               <Button variant="contained" >Add Flats</Button>
+            </div>
+           
         </div>
     
       
     )
 }
+
+export default Home
 
 
 

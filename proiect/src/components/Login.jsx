@@ -13,7 +13,7 @@ function Login() {
     const handleLogin = async () => {
         try {
             await doSignInWithEmailAndPassword(email, password);
-            navigate('/');
+            navigate('/home');
         } catch (error) {
             console.error("Login failed:", error);
         }

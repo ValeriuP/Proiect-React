@@ -32,17 +32,19 @@ function Register() {
 
             await doCreateUserWithEmailAndPassword(email, password)
                 .then(async (user) => {
+                    console.log(firstName);
                     await setDoc(
                         doc(db, "users", user.user.uid),
-                        { firstName, lastName, birthdate, email, password }
+                        { firstName:firstName, lastName:lastName, birthdate:birthdate, email:email, password:password, isAdmin:false, favorite:[], }
                     );
                     setIsReg(false);
+                    console.log(user.user.uid)
                     setFirstName("");
                     setLastName("");
                     setBirthdate("");
                     setEmail("");
                     setPassword("");
-                    navigate('/');
+                    
                 })
                 .catch((error) => {
                     console.error(error);
@@ -54,7 +56,7 @@ function Register() {
 
     useEffect(() => {
         if (currentUser) {
-            navigate('/');
+            navigate('/home');
         }
     }, [currentUser, navigate]);
 
