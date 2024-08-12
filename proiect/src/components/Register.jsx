@@ -4,8 +4,7 @@ import { useNavigate,Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authContext';
 import { doCreateUserWithEmailAndPassword } from '../../auth'; 
 import { setDoc,doc,collection } from 'firebase/firestore'; 
-import { db } from '../../firebase';
-
+import { db,} from '../../firebase';
 
 function Register() {
     const [firstName, setFirstName] = useState("");
