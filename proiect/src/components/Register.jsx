@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react';
 import { Button,TextField,Typography,Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate,Link } from 'react-router-dom'; 
 import { useAuth } from '../contexts/authContext';
 import { doCreateUserWithEmailAndPassword } from '../../auth'; 
 import { setDoc,doc,collection } from 'firebase/firestore'; 
