@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Outlet,Link,useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { Button,Box,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper } from "@mui/material";
 import { doCreateUserWithEmailAndPassword}from "../../auth";
@@ -9,31 +9,101 @@ import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
 import '../Home.css';
 
+
 function Home(){
     const navigate= useNavigate();
     const {currentUser}=useAuth();
     const [users,setUsers]=useState([]);
-    const [isAdmin,setAdmin]=useState(false);
+    const [isAdmin,setIsAdmin]=useState(false);
     const [editData, setEditData]= useState({});
+    const location =useLocation();
+    const [showAllFlats,setShowAllFlats]=useState(true);
     
+    useEffect(()=>{
+        if (!currentUser){
+            navigate('/login');
+        }else{
+            checkAdmin();
+            fetchUsers();
+        }
+    },[currentUser,navigate]);
+    
+    useEffect(() => {
+        // Actualizează vizibilitatea lui AllFlats în funcție de ruta curentă
+        if (location.pathname === '/') {
+            setShowAllFlats(true);
+        } else {
+            setShowAllFlats(false);
+        }
+    }, [location]);
+    const checkAdminStatus = async () => {
+        if (currentUser) {
+            const userDoc = doc(db, "users", currentUser.uid);
+            const userSnapshot = await getDoc(userDoc);
+            const userData = userSnapshot.data();
+            if (userData) {
+                setIsAdmin(userData.isAdmin);
+            }
+        }
+    };
+    const fetchUsers = async () => {
+        const usersCollection = collection(db, "users");
+        const usersSnapshot = await getDocs(usersCollection);
+        const usersList = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    };
+
     
     return (
-        <div className="homeContainer" >
-            <div className="headercontainer">
-            <Header />
+        <>
+         <Header />
+         <AppBar
+                position="static"
+                sx={{
+                    backgroundColor: 'transparent',
+                    boxShadow: 'none'
+                }}
+            >
+                <Toolbar>
+                    <Button
+                        color="inherit"
+                        component={Link}
+                        to="/my-flats"
+                        sx={{ color: 'black' }}
+                    >
+                        My Flats
+                    </Button>
+                    <Button
+                        color="inherit"
+                        component={Link}
+                        to="/favorite-flats"
+                        sx={{ color: 'black' }}
+                    >
+                        Favorite Flats
+                    </Button>
+                    <Button
+                        color="inherit"
+                        component={Link}
+                        to="/add-flat"
+                        sx={{ color: 'black' }}
+                    >
+                        Add Flat
+                    </Button>
+                </Toolbar>
+            </AppBar>
+            <div style={{ padding: '20px' }}>
+                <Outlet />
             </div>
-            
-            <div className="homeContainer_2">
-               <Button variant="contained" >Add Flats</Button>
-            </div>
-           
-        </div>
+            {showAllFlats && <AllFlats />} {/* Afișează AllFlats doar dacă showAllFlats este true */}
+        
+    
+        
+        </>
     
       
     )
 }
 
-export default Home
+export default Home;
 
 
 

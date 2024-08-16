@@ -9,13 +9,25 @@ function Login() {
     const [password, setPassword] = useState("");
     const { userLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const [error, setError]=useState("");
+    
 
     const handleLogin = async () => {
         try {
+            setError("");
             await doSignInWithEmailAndPassword(email, password);
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.error("Login failed:", error);
+            if (error.code === "auth/user-not-found") {
+                setError("Emailul introdus nu există.");
+            } else if (error.code === "auth/invalid-email") {
+                setError("Emailul introdus este invalid.");
+            } else if (error.code === "auth/wrong-password") {
+                setError("Parola introdusă este incorectă.");
+            } else {
+                setError("A apărut o eroare. Te rugăm să încerci din nou.");
+            }
         }
     };
 
