@@ -56,7 +56,7 @@ function Home(){
     return (
         <>
          <Header />
-         <AppBar
+         <div
                 position="static"
                 sx={{
                     backgroundColor: 'transparent',
@@ -89,7 +89,7 @@ function Home(){
                         Add Flat
                     </Button>
                 </Toolbar>
-            </AppBar>
+            </div>
             <div style={{ padding: '20px' }}>
                 <Outlet />
             </div>
