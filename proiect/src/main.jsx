@@ -23,8 +23,8 @@ const router = createBrowserRouter([
   {
     path: '/', element: <Home />, children: [
       { path: 'all-flats', element: <AllFlats /> },
-      { path: 'my-flats', element: <MyFlats /> },
-      { path: 'favorite-flats', element: <FavoriteFlats /> },
+      // { path: 'my-flats', element: <MyFlats /> },
+      // { path: 'favorite-flats', element: <FavoriteFlats /> },
       { path: 'add-flat', element: <AddFlat /> },
 
     ]
@@ -35,19 +35,7 @@ const router = createBrowserRouter([
     ]
   },
   
-//   {
 
-//   path:'/register',
-//   element:<Register/>
-// },
-// {
-//   path: '/login',
-//   element:<Login />
-// },
-// {
-//   path: '/home',
-//   element:<Home />
-// },
 
 ])
 
