@@ -11,6 +11,7 @@ import AddFlat from './components/addFlats.jsx';
 import AllFlats from './components/AllFlats.jsx';
 import MyProfiles from './components/MyProfiles.jsx';
 import UsersProfiles from './components/UsersProfiles.jsx';
+import MyFlats from './components/MyFlats.jsx';
 
 
 const router = createBrowserRouter([
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   {
     path: '/', element: <Home />, children: [
       { path: 'all-flats', element: <AllFlats /> },
-      // { path: 'my-flats', element: <MyFlats /> },
+      { path: 'my-flats', element: <MyFlats /> },
       // { path: 'favorite-flats', element: <FavoriteFlats /> },
       { path: 'add-flat', element: <AddFlat /> },
 

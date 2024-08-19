@@ -17,16 +17,16 @@ function AllFlats() {
     useEffect(() => {
         const fetchFlats = async () => {
             const flatsCollection = collection(db, 'flats');
-            const flatsSnapshot = await getDocs(flatsCollection);
-            const flatsList = flatsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const flatsNow = await getDocs(flatsCollection);
+            const flatsList = flatsNow.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setFlats(flatsList);
             setFilteredFlats(flatsList);
         };
 
         const fetchFavorites = async () => {
             const favoritesCollection = collection(db, 'users', currentUser.uid, 'favorites');
-            const favoritesSnapshot = await getDocs(favoritesCollection);
-            const favoritesList = favoritesSnapshot.docs.map(doc => doc.id);
+            const flatsNow = await getDocs(favoritesCollection);
+            const favoritesList = flatsNow.docs.map(doc => doc.id);
             setFavoriteFlats(favoritesList);
         };
 
