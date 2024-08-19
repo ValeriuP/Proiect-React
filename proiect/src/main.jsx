@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/authContext.jsx';
+
 import Register from './components/Register.jsx';
 import Login from './components/Login.jsx';
 import Home from './components/Home.jsx';
@@ -14,27 +15,40 @@ import UsersProfiles from './components/UsersProfiles.jsx';
 import MyFlats from './components/MyFlats.jsx';
 
 
-const router = createBrowserRouter([
+const router = createBrowserRouter([{
+  path:'/',
+  element:<Register/>,
+ 
+},
+ {
+  path:'/login',
+  element:<Login />
+ }
 
-  {path:'/login',element:<Login />},
-  {path:'/register',element:<Register />},
+
+   
 
 
 
-  {
-    path: '/', element: <Home />, children: [
-      { path: 'all-flats', element: <AllFlats /> },
-      { path: 'my-flats', element: <MyFlats /> },
-      // { path: 'favorite-flats', element: <FavoriteFlats /> },
-      { path: 'add-flat', element: <AddFlat /> },
+  // {path:'/login',element:<Login />},
+  // {path:'/register',element:<Register />},
 
-    ]
-  },
-  {
-    path: '/my-profiles', element: <MyProfiles />, children: [
-      { path: 'users-profiles', element: <UsersProfiles /> },
-    ]
-  },
+
+
+  // {
+  //   path: '/', element: <Home />, children: [
+  //     { path: 'all-flats', element: <AllFlats /> },
+  //     { path: 'my-flats', element: <MyFlats /> },
+  //     { path: 'favorite-flats', element: <FavoriteFlats /> },
+  //     { path: 'add-flat', element: <AddFlat /> },
+
+  //   ]
+  // },
+  // {
+  //   path: '/my-profiles', element: <MyProfiles />, children: [
+  //     { path: 'users-profiles', element: <UsersProfiles /> },
+  //   ]
+  // },
   
 
 
