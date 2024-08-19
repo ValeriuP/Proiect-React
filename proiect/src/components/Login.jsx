@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authContext';
@@ -11,6 +11,11 @@ function Login() {
     const navigate = useNavigate();
     const [error, setError]=useState("");
     
+    // useEffect(()=>{
+    //     if(currenUser){
+    //         navigate('/home')
+    //     }
+    // })
 
     const handleLogin = async () => {
         try {

@@ -2,11 +2,10 @@ import React,{useEffect,useState} from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../contexts/authContext";
 // import {DataGrid} from "@mui/material"
-// import {DataGrid} from "@mui/x-data-grid";
+// import {DataGrid} from "@mui/x-data-grid"; nu functioneaza da eroare
 
-// import {Favorite,Send,FavoriteBorder} from '@mui/icons-material'
+// import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' nu functioneaza da eroare
 import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
-
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);

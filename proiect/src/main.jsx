@@ -17,13 +17,22 @@ import MyFlats from './components/MyFlats.jsx';
 
 const router = createBrowserRouter([{
   path:'/',
-  element:<Register/>,
+  element:<Home/>,
  
 },
  {
   path:'/login',
   element:<Login />
+ },
+ {
+  path:'/register',
+  element:<Register />
+ },
+ {
+  path:'/myFlats',
+  element:<MyFlats />
  }
+
 
 
    
