@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter,Navigate,RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/authContext.jsx';
 
 import Register from './components/Register.jsx';
@@ -29,35 +29,26 @@ const router = createBrowserRouter([{
   element:<Register />
  },
  {
-  path:'/myFlats',
+  path:'/my-flats',
   element:<MyFlats />
+ },
+ {
+  path:'/add-flat',
+  element:<AddFlat/>
  }
-
-
-
-   
-
-
-
-  // {path:'/login',element:<Login />},
-  // {path:'/register',element:<Register />},
-
-
-
-  // {
-  //   path: '/', element: <Home />, children: [
-  //     { path: 'all-flats', element: <AllFlats /> },
-  //     { path: 'my-flats', element: <MyFlats /> },
-  //     { path: 'favorite-flats', element: <FavoriteFlats /> },
-  //     { path: 'add-flat', element: <AddFlat /> },
-
-  //   ]
-  // },
-  // {
-  //   path: '/my-profiles', element: <MyProfiles />, children: [
-  //     { path: 'users-profiles', element: <UsersProfiles /> },
-  //   ]
-  // },
+ ,
+ {
+  path:'/all-flats',
+  element:<AllFlats/>
+ },
+ {
+   path:'/my-profiles',
+   element:<MyProfiles />
+ },
+ {
+  path:'/users-profiles',
+  element:<UsersProfiles />
+ }
   
 
 

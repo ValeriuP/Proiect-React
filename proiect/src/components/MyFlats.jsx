@@ -20,7 +20,7 @@ function MyFlats(){
         };
         fetchFlats();
 
-    },[currentUser.uid]);
+    },[currentUser]);
 
     return(
         <TableContainer component={Paper}>

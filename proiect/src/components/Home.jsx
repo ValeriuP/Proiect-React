@@ -1,12 +1,13 @@
 import React,{useEffect,useState} from "react";
 import { useNavigate,Outlet,Link,useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import { Button,Box,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper } from "@mui/material";
+import { Button,Box,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Toolbar } from "@mui/material";
 import { doCreateUserWithEmailAndPassword}from "../../auth";
 import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
+import AllFlats from "./AllFlats";
 import '../Home.css';
 
 
@@ -23,7 +24,7 @@ function Home(){
         if (!currentUser){
             navigate('/login');
         }else{
-            checkAdmin();
+            checkAdminStatus();
             fetchUsers();
         }
     },[currentUser,navigate]);
@@ -55,7 +56,7 @@ function Home(){
     
     return (
         <>
-         <Header />
+         {/* <Header /> */}
          <div
                 position="static"
                 sx={{

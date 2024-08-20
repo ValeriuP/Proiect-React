@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from "react";
 import { db } from "../../firebase";
+import {Box,TextField,IconButton} from "@mui/material"
+import {DataGrid} from "@mui/x-data-grid";//nu functioneaza da eroare
 import { useAuth } from "../contexts/authContext";
-// import {DataGrid} from "@mui/material"
-// import {DataGrid} from "@mui/x-data-grid"; nu functioneaza da eroare
-
-// import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' nu functioneaza da eroare
+import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' //nu functioneaza da eroare
 import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
+import Header from "./Header";
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);
@@ -63,15 +63,15 @@ function AllFlats() {
     };
 
     const columns = [
-        { field: 'city', headerName: 'City', width: 200 },
-        { field: 'streetName', headerName: 'Street Name', width: 200 },
+        { field: 'city', headerName: 'City', width: 150 },
+        { field: 'streetName', headerName: 'Street Name', width: 150 },
         { field: 'streetNumber', headerName: 'Street Number', width: 150 },
-        { field: 'areaSize', headerName: 'Area Size', width: 120 },
+        { field: 'areaSize', headerName: 'Area Size', width: 100 },
         { field: 'ac', headerName: 'AC', width: 100 },
         { field: 'yearBuilt', headerName: 'Year Built', width: 120 },
         { field: 'rentPrice', headerName: 'Rent Price $', width: 120 },
         { field: 'dateAvailable', headerName: 'Date Available', width: 150 },
-        { field: 'ownerEmail', headerName: 'Email Owner', width: 200 },
+        { field: 'ownerEmail', headerName: 'Email Owner', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -92,23 +92,26 @@ function AllFlats() {
     ];
 
     return (
+        <div>
+            <Header />
         <Box>
             <TextField
                 variant="outlined"
                 placeholder="Search..."
                 onChange={handleSearch}
-                sx={{ marginBottom: 2, width: '300px' }}
+                sx={{ marginBottom: 3, width: '200px' }}
             />
 
             <DataGrid
                 rows={filteredFlats}
                 columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
+                pageSize={12}
+                rowsPerPageOptions={[12]}
                 disableSelectionOnClick
                 autoHeight
             />
         </Box>
+        </div>
     );
 }
 

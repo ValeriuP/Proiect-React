@@ -16,13 +16,13 @@ function Header() {
             <Box
                 component="nav"
                 sx={{
-                    // display: 'flex',
-                    // justifyContent: 'space-between',
-                    // alignItems: 'center',
-                    // padding: '0 20px',
-                    // backgroundColor: '#f5f5f5',
-                    // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    // marginTop:'10px'
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0 20px',
+                    backgroundColor: '#f5f5f5',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    marginTop:'10px'
                 }}
             >
                 <Typography variant="h6">Home Page</Typography>
@@ -55,6 +55,14 @@ function Header() {
                         </>
                     ) : (
                         <>
+                        <div>
+                         <Button color="inherit" component={Link} to="/"> Home</Button>
+                         <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
+                         </div> 
+                       
+                
+
+
                             <Button
                                 style={{
                                     backgroundColor: "#91c1eb",
