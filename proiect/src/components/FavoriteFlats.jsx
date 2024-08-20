@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,Paper,ToggleButton,ToggleButtonGroup }  from "@mui/material";
 import { doc,deleteDoc,getDocs,collection,query,where } from "firebase/firestore";
 import { Try } from "@mui/icons-material";
+import Header from "./Header";
 
 function FavoriteFlats(){
     const {currentUser}=useAuth;
@@ -43,13 +44,17 @@ function FavoriteFlats(){
 
 };
 return (
+    <div>
+        <div>
+            <Header />
+        </div>
     <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>City</TableCell>
-                        <TableCell>Street Name</TableCell>
-                        <TableCell>Street Number</TableCell>
+                        <TableCell>Stret Name</TableCell>
+                        <TableCell>Stret Number</TableCell>
                         <TableCell>Area Size</TableCell>
                         <TableCell>AC</TableCell>
                         <TableCell>Year Built</TableCell>
@@ -83,6 +88,8 @@ return (
                 </TableBody>
             </Table>
         </TableContainer>
+</div>
+
 );
 }
 }

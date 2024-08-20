@@ -29,6 +29,7 @@ function Header() {
                    <div>
                          <Button color="inherit" component={Link} to="/"> Home</Button>
                          <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
+                         <Button color="inherit" component={Link} to="/all-flets">All Flats</Button>
                          </div> 
                 <Typography variant="h6">Home Page</Typography>
                 <Box sx={{ display:'flex', alignItems: 'center' }}>

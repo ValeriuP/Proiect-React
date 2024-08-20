@@ -52,8 +52,11 @@ const router = createBrowserRouter([{
  {
   path:'/favorite-flats',
   element:<FavoriteFlats />
+ },
+ {
+ path:'/all-flats',
+ element:<AllFlats />
  }
-  
 
 
 ])
