@@ -4,8 +4,7 @@ import { db } from "../../firebase";
 import { doc,getDoc,updateDoc,deleteDoc } from "firebase/firestore";
 import { updatePassword as firebaseUpdatePassword  } from "firebase/auth";
 import Header from "./Header";
-import { Button,IconButton,Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,TextField,Typography,Grid,Card } from "@mui/material";
-
+import { Button,Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,TextField,Typography,Grid,Card } from "@mui/material";
 
 const MyProfiles = () => {
     const { currentUser } = useAuth();
@@ -112,7 +111,7 @@ const MyProfiles = () => {
                 const userDocRef = doc(db, 'users', currentUser.uid);
                 await deleteDoc(userDocRef);
                 alert('Contul a fost șters cu succes din Firestore.');
-                // Aici puteți adăuga logica pentru deconectare sau redirecționare
+                //  adăuga logica pentru deconectare sau redirecționare
             } catch (error) {
                 console.error('Error deleting user:', error);
                 alert('A apărut o eroare la ștergerea utilizatorului.');
@@ -143,17 +142,17 @@ const MyProfiles = () => {
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="body1"><strong>Data nașterii:</strong> {userData.birthdate}</Typography>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <IconButton color="primary" onClick={handleEditOpen}>
-                                        <EditIcon />
-                                    </IconButton>
+                                <Grid item xs={5} sm={5}>
+                                    <Button color="primary" onClick={handleEditOpen}>
+                                     Edit <Button />
+                                    </Button>
                                 </Grid>
                                 {isAdmin && (
-                                    <Grid item xs={12} sm={6}>
-                                        <IconButton color="secondary" onClick={handleDelete}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </Grid>
+                                    <div item xs={5} sm={5}>
+                                        <Button color="secondary" onClick={handleDelete}>
+                                    Delete <Button />
+                                        </Button>
+                                    </div>
                                 )}
                             </Grid>
                         </CardContent>

@@ -13,6 +13,7 @@ function Header() {
 
   return (
     <>
+    
             <Box
                 component="nav"
                 sx={{
@@ -25,15 +26,21 @@ function Header() {
                     marginTop:'10px'
                 }}
             >
+                   <div>
+                         <Button color="inherit" component={Link} to="/"> Home</Button>
+                         <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
+                         </div> 
                 <Typography variant="h6">Home Page</Typography>
                 <Box sx={{ display:'flex', alignItems: 'center' }}>
                     {userLoggedIn ? (
                         <>
+                       
                         <div className="hello">
                             <Typography variant="body1" sx={{ marginRight: '20px',marginLeft:'150px'}}>
                                 Hello, {currentUser.email}
                             </Typography>
                             </div>
+                         
                             <Button
                                 style={{
                                     backgroundColor: "#ed5853",
@@ -52,41 +59,19 @@ function Header() {
                             >
                                 Logout
                             </Button>
+                         
+                        
                         </>
+                         
                     ) : (
                         <>
-                        <div>
-                         <Button color="inherit" component={Link} to="/"> Home</Button>
-                         <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
-                         </div> 
                        
-                
+                       
+                       
 
 
-                            <Button
-                                style={{
-                                    backgroundColor: "#91c1eb",
-                                    color: "black",
-                                    fontSize: "12px",
-                                    margin: "4px",
-                                    alignItems: "center"
-                                }}
-                                href="/login"
-                            >
-                                Login
-                            </Button>
-                            <Button
-                                style={{
-                                    backgroundColor: "#91c1eb",
-                                    color: "black",
-                                    fontSize: "12px",
-                                    margin: "4px",
-                                    alignItems: "center"
-                                }}
-                                href="/register"
-                            >
-                                Register
-                            </Button>
+                            
+                            
                         </>
                     )}
                 </Box>

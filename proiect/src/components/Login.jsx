@@ -7,7 +7,7 @@ import { doSignInWithEmailAndPassword } from '../../auth';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { userLoggedIn } = useAuth();
+    // const { userLoggedIn } = useAuth();
     const navigate = useNavigate();
     const [error, setError]=useState("");
     
