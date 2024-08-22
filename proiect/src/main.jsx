@@ -38,8 +38,8 @@ const router = createBrowserRouter([{
  }
  ,
  {
-  path:'/all-flats',
-  element:<AllFlats/>
+ path:'/all-flats',
+ element:<AllFlats />
  },
  {
    path:'/my-profiles',
