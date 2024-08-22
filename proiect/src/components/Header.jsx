@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../../auth";
 import { Button,Box,Typography } from "@mui/material";
@@ -10,6 +10,20 @@ function Header() {
     const {currentUser,userLoggedIn}=useAuth();
     const isLoginPage =location.pathname ==='/login';
     const isRegisterPage= location.pathname==='/register';
+
+    useEffect(()=>{console.log(location)},[])
+    function renderSwitch(param)
+    {
+        switch (param)
+        {
+            case "/":
+                return "Home Page"
+                case "/all-flats":
+                return "All Flats"
+        }
+        
+
+    }
 
   return (
     <>
@@ -29,9 +43,9 @@ function Header() {
                    <div>
                          <Button color="inherit" component={Link} to="/"> Home</Button>
                          <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
-                         <Button color="inherit" component={Link} to="/all-flets">All Flats</Button>
+                         <Button color="inherit" component={Link} to="/all-flats">All Flats</Button>
                          </div> 
-                <Typography variant="h6">Home Page</Typography>
+                <Typography variant="h6">{renderSwitch(location.pathname)}</Typography>
                 <Box sx={{ display:'flex', alignItems: 'center' }}>
                     {userLoggedIn ? (
                         <>
@@ -53,6 +67,7 @@ function Header() {
                                     alignItems: "center"
                                 }}
                                 onClick={() => {
+                                    console.log("askjhdsa")
                                     doSignOut().then(() => {
                                         navigate('/login');
                                     });

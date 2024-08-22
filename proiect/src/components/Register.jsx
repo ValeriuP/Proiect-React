@@ -55,6 +55,7 @@ function Register() {
     }
 
     useEffect(() => {
+        console.log(currentUser)
         if (currentUser) {
             navigate('/login');
         }

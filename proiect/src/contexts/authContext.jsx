@@ -11,7 +11,7 @@ export function useAuth(){
 export function AuthProvider({children}){
 const [currentUser,setCurrentUser]=useState(null);
 const [userLoggedIn,setUserLoggedIn]=useState(false);
-const [loading,setLoading]=useState(false);
+const [loading,setLoading]=useState(true);
 
 
 useEffect(()=>{
@@ -23,6 +23,8 @@ async function initializeUser(user){
     setLoading(true);
     if(user)
     {
+        console.log("data")
+        console.log(loading)
         setCurrentUser({...user});
         setUserLoggedIn(true);
     }

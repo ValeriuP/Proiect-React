@@ -13,7 +13,7 @@ import '../Home.css';
 
 function Home(){
     const navigate= useNavigate();
-    const {currentUser}=useAuth();
+    const {currentUser,userLoggedIn,loading}=useAuth();
     const [users,setUsers]=useState([]);
     const [isAdmin,setIsAdmin]=useState(false);
     const [editData, setEditData]= useState({});
@@ -21,13 +21,18 @@ function Home(){
     const [showAllFlats,setShowAllFlats]=useState(true);
     
     useEffect(()=>{
+      
+       
+        if(!loading)
+        {
         if (!currentUser){
             navigate('/login');
         }else{
             checkAdminStatus();
             fetchUsers();
         }
-    },[currentUser,navigate]);
+        }
+    },[loading]);
     
     useEffect(() => {
         // Actualizează vizibilitatea lui AllFlats în funcție de ruta curentă

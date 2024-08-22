@@ -7,28 +7,36 @@ import { Try } from "@mui/icons-material";
 import Header from "./Header";
 
 function FavoriteFlats(){
-    const {currentUser}=useAuth;
+    const {currentUser,userLoggedIn,loading}=useAuth();
     const [favoriteFlats,setFavoriteFlats]=useState([]);
 
     useEffect(()=>{
         const nowFavoriteFlats=async ()=> {
             try{
+                console.log(currentUser);
+                console.log(loading)
+                if(!loading)
+                {
+                    console.log("test")
                 const favoriteColection=collection(db,'users',currentUser.uid,'favorites');
                 const favoriteNow=await getDocs(favoriteColection);
                 const flatIdis=favoriteNow.docs.map(doc=>doc.data().flatId);
+                console.log(flatIdis)
 
                 if( flatIdis.length>0) {
                     const flatsQuestion=query(collection(db, 'flats'),where('_name_','in',flatIdis));
                     const flatsNow=await getDocs(flatsQuestion);
                     const flatsList=flatsNow.docs.map(doc=>({id:doc.id,...doc.data()}));
+                    console.log(flatsList)
                     setFavoriteFlats(flatsList);
                 }
+            }
             } catch (error) {
                 console.error('eroare la preluarea apartamentelor preferate',error);
             }
         };
         nowFavoriteFlats();
-    },[currentUser]);
+    },[loading]);
 
 
     const handleDelete =async (flatId) =>{
@@ -64,21 +72,21 @@ return (
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {favoriteFlats.map(flat => (
-                        <TableRow key={flat.id}>
-                            <TableCell>{flat.city}</TableCell>
-                            <TableCell>{flat.streetName}</TableCell>
-                            <TableCell>{flat.streetNumber}</TableCell>
-                            <TableCell>{flat.areaSize}</TableCell>
-                            <TableCell>{flat.ac}</TableCell>
-                            <TableCell>{flat.yearBuilt}</TableCell>
-                            <TableCell>{flat.rentPrice}</TableCell>
-                            <TableCell>{flat.dateAvailable}</TableCell>
+                    {favoriteFlats.map(favoriteFlats => (
+                        <TableRow key={favoriteFlats.id}>
+                            <TableCell>{favoriteFlats.city}</TableCell>
+                            <TableCell>{favoriteFlats.streetName}</TableCell>
+                            <TableCell>{favoriteFlats.streetNumber}</TableCell>
+                            <TableCell>{favoriteFlats.areaSize}</TableCell>
+                            <TableCell>{favoriteFlats.ac}</TableCell>
+                            <TableCell>{favoriteFlats.yearBuilt}</TableCell>
+                            <TableCell>{favoriteFlats.rentPrice}</TableCell>
+                            <TableCell>{favoriteFlats.dateAvailable}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="outlined"
                                     color="secondary"
-                                    onClick={() => handleDelete(flat.id)}
+                                    onClick={() => handleDelete(favoriteFlats.id)}
                                 >
                                     Delete
                                 </Button>
