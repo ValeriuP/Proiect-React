@@ -1,11 +1,12 @@
 import React,{useEffect,useState} from "react";
+import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
+import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
 import {Box,TextField,IconButton} from "@mui/material"
 import {DataGrid} from "@mui/x-data-grid";//nu functioneaza da eroare
-import { useAuth } from "../contexts/authContext";
 import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' //nu functioneaza da eroare
-import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
+import FavoriteFlats from "./FavoriteFlats";
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);

@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../../auth";
 import { Button,Box,Typography } from "@mui/material";
 import { Link,useNavigate,useLocation } from "react-router-dom";
+import { StayCurrentPortrait } from "@mui/icons-material";
 
 function Header() {
     const navigate=useNavigate();
@@ -37,7 +38,8 @@ function Header() {
                     padding: '0 20px',
                     backgroundColor: '#f5f5f5',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    marginTop:'10px'
+                    marginTop:'10px',
+                    opacity:3,
                 }}
             >
                    <div>
@@ -45,7 +47,14 @@ function Header() {
                          <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
                          <Button color="inherit" component={Link} to="/all-flats">All Flats</Button>
                          </div> 
+<<<<<<< HEAD
                 <Typography variant="h6">{renderSwitch(location.pathname)}</Typography>
+=======
+                         <div>
+                            {/* <Typography variant='h1'sx={{display:'flex',alignItems:'center'}}>Hello ,document</Typography> */}
+                         </div>
+                <Typography variant="h6">Home Page</Typography>
+>>>>>>> 1830b3ee2c091729c0a037ac9e8af26656a24bc4
                 <Box sx={{ display:'flex', alignItems: 'center' }}>
                     {userLoggedIn ? (
                         <>

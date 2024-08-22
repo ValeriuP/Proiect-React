@@ -32,11 +32,6 @@ function Register() {
 
             await doCreateUserWithEmailAndPassword(email, password)
                 .then(async (user) => {
-                    console.log(firstName);
-                    await setDoc(
-                        doc(db, "users", user.user.uid),
-                        { firstName:firstName, lastName:lastName, birthdate:birthdate, email:email, password:password, isAdmin:false, favorite:[], }
-                    );
                     setIsReg(false);
                     console.log(user.user.uid)
                     setFirstName("");
@@ -44,6 +39,12 @@ function Register() {
                     setBirthdate("");
                     setEmail("");
                     setPassword("");
+                    console.log(firstName);
+                    await setDoc(
+                        doc(db, "users", user.user.uid),
+                        { firstName:firstName, lastName:lastName, birthdate:birthdate, email:email, password:password, isAdmin:false, favorite:[], }
+                    );
+                //   aici
                     
                 })
                 .catch((error) => {
@@ -69,6 +70,7 @@ function Register() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '80vh',
+                
             }}
         >
             <TextField
