@@ -20,6 +20,8 @@ function Header() {
                 return "Home Page"
                 case "/all-flats":
                 return "All Flats"
+                case"/my-profiles":
+                return "My Profiles"
         }
         
 
@@ -46,7 +48,16 @@ function Header() {
                          <Button color="inherit" component={Link} to="/my-profiles">My Profile </Button>
                          <Button color="inherit" component={Link} to="/all-flats">All Flats</Button>
                          </div> 
+<<<<<<< HEAD
                 <Typography variant="h6">{renderSwitch(location.pathname)}</Typography>
+=======
+
+                <Typography variant="h4">{renderSwitch(location.pathname)}</Typography>
+                         <div>
+                            {/* <Typography variant='h1'sx={{display:'flex',alignItems:'center'}}>Hello ,document</Typography> */}
+                         </div>
+                {/* <Typography variant="h6">Home Page</Typography> */}
+>>>>>>> 45eb4aeb676b5d79c8b52273348ca930b6b78b16
                 <Box sx={{ display:'flex', alignItems: 'center' }}>
                     {userLoggedIn ? (
                         <>
