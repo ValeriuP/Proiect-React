@@ -7,7 +7,7 @@ import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
-import AllFlats from "./Allflats";
+import AllFlats from "./AllFlats";
 import '../Home.css';
 
 
