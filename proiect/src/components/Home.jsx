@@ -3,14 +3,8 @@ import { useNavigate,Link,useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { Button,Toolbar } from "@mui/material";
 import { db } from "../../firebase";
-<<<<<<< HEAD
 import { collection,getDoc,getDocs,doc } from "firebase/firestore";
 import AllFlats from "./Allflats";
-=======
-import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
-import Header from "./Header";
-import AllFlats from "./AllFlats";
->>>>>>> 799d4c2561f355ba8f05651d928045d52487368f
 import '../Home.css';
 
 
