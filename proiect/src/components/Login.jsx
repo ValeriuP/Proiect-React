@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authContext';
 import { doSignInWithEmailAndPassword } from '../../auth';
-
+import './Login.css'
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -37,6 +37,7 @@ function Login() {
     };
 
     return (
+        <div className="login__container">
         <Box
             sx={{
                 display: 'flex',
@@ -46,6 +47,10 @@ function Login() {
                 height: '70vh',
             }}
         >
+               <Typography variant="h4" sx={{ marginBottom: 4, color:'#3E482A'}} >
+               Sign In
+            </Typography>
+
             <TextField
                 required
                 id="email"
@@ -66,14 +71,17 @@ function Login() {
             <Button
                 variant="contained"
                 onClick={handleLogin}
-                sx={{ marginBottom: 2 }}
+                sx={{ marginBottom: 2, width: '210px' , backgroundColor: '#3E482A', color:'#aaaaa2', '&:hover':{
+                    backgroundColor:'#3E482A', color:'#79804D'
+                }}}
             >
                 Login
             </Button>
-            <Typography variant="body2">
-                Dacă nu aveți cont, <Link to="/register">Register</Link>
+            <Typography variant="body2" sx={{ color:'#3E482A', marginTop: 3}}>
+                Don't have an account? <Link to="/register" className="link-register-style">Register</Link>
             </Typography>
         </Box>
+        </div>
     );
 }
 

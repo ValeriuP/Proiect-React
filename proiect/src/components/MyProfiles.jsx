@@ -127,20 +127,20 @@ const MyProfiles = () => {
                     <Card>
                         <CardContent>
                             <Typography variant="h5" align="center" gutterBottom>
-                                Profil
+                            User Profile
                             </Typography>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
-                                    <Typography variant="body1"><strong>Prenume:</strong> {userData.firstName}</Typography>
+                                    <Typography variant="body1"><strong>First Name:</strong> {userData.firstName}</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <Typography variant="body1"><strong>Nume:</strong> {userData.lastName}</Typography>
+                                    <Typography variant="body1"><strong>Last Name:</strong> {userData.lastName}</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="body1"><strong>Email:</strong> {userData.email}</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <Typography variant="body1"><strong>Data nașterii:</strong> {userData.birthdate}</Typography>
+                                    <Typography variant="body1"><strong>Date of Birth:</strong> {userData.birthdate}</Typography>
                                 </Grid>
                                 <Grid item xs={5} sm={5}>
                                     <Button color="primary" onClick={handleEditOpen}>

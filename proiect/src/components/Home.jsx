@@ -7,7 +7,7 @@ import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
 import Header from "./Header";
-import AllFlats from "./AllFlats";
+import AllFlats from "./Allflats";
 import '../Home.css';
 
 
@@ -61,20 +61,18 @@ function Home(){
     
     return (
         <>
-         {/* <Header /> */}
-         <div
-                position="static"
-                sx={{
-                    backgroundColor: 'transparent',
-                    boxShadow: 'none'
-                }}
-            >
+        
+          {showAllFlats && <AllFlats />} {/* Afișează AllFlats doar dacă showAllFlats este true */}
+         <div>
                 <Toolbar>
-                    <Button
+                    <Button 
                         color="inherit"
                         component={Link}
                         to="/my-flats"
-                        sx={{ color: 'black' }}
+                        sx={{
+                            color:' #aaaaa2','&:hover':{
+                backgroundColor:'#3E482A', color:'#79804D'}
+                        }} 
                     >
                         My Flats
                     </Button>
@@ -82,7 +80,10 @@ function Home(){
                         color="inherit"
                         component={Link}
                         to="/favorite-flats"
-                        sx={{ color: 'black' }}
+                        sx={{
+                            color:' #aaaaa2','&:hover':{
+                backgroundColor:'#3E482A', color:'#79804D'}
+                        }} 
                     >
                         Favorite Flats
                     </Button>
@@ -90,16 +91,17 @@ function Home(){
                         color="inherit"
                         component={Link}
                         to="/add-flat"
-                        sx={{ color: 'black' }}
+                        sx={{
+                            color:' #aaaaa2','&:hover':{
+                backgroundColor:'#3E482A', color:'#79804D'}
+                        }} 
                     >
                         Add Flat
                     </Button>
                 </Toolbar>
             </div>
-            <div style={{ padding: '20px' }}>
-                <Outlet />
-            </div>
-            {showAllFlats && <AllFlats />} {/* Afișează AllFlats doar dacă showAllFlats este true */}
+          
+           
         
     
         

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body{
+    background-color: #3E482A;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+}
+#firstName{
+    background-color: #aaaaa2;
+}
+#lastName{
+    background-color: #aaaaa2;
+
+}
+#birthdate{
+    background-color: #aaaaa2;
+
+}
+
+#email{
+    background-color: #aaaaa2;
+}
+#password{
+    background-color: #aaaaa2;
+
+}
+.registration__container{
+padding-bottom: 80px;
+border: 2px solid  #79804D;
+border-radius: 10px;
+width: 400px;
+height:600px;
+margin-top: 60px;
+background-color: #79804D;
+}
+
+.link-style{
+    color: #3E482A;
+}
+.link-style:hover{
+    color: #3E482A;
+   text-decoration-line: underline;
+}

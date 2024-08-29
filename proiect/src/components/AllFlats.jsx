@@ -6,7 +6,7 @@ import {Box,TextField,IconButton} from "@mui/material"
 import {DataGrid} from "@mui/x-data-grid";//nu functioneaza da eroare
 import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' //nu functioneaza da eroare
 import Header from "./Header";
-import FavoriteFlats from "./FavoriteFlats";
+
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);
@@ -64,7 +64,7 @@ function AllFlats() {
     };
 
     const columns = [
-        { field: 'city', headerName: 'City', width: 150 },
+        { field: 'city', headerName: 'City', width: 150,},
         { field: 'streetName', headerName: 'Street Name', width: 150 },
         { field: 'streetNumber', headerName: 'Street Number', width: 150 },
         { field: 'areaSize', headerName: 'Area Size', width: 100 },
@@ -95,23 +95,29 @@ function AllFlats() {
     return (
         <div>
             <Header />
-        <Box>
+            <div className="table__container">
+        <Box 
+       
+        >
             <TextField
                 variant="outlined"
                 placeholder="Search..."
                 onChange={handleSearch}
-                sx={{ marginBottom: 3, width: '200px' }}
+                sx={{ marginBottom: 3, marginTop: 3, width: '200px', backgroundColor:' #79804D', }}
             />
 
-            <DataGrid
+            <DataGrid 
                 rows={filteredFlats}
                 columns={columns}
                 pageSize={12}
                 rowsPerPageOptions={[12]}
                 disableSelectionOnClick
                 autoHeight
+                sx={{ backgroundColor:' #79804D',  }}
+ 
             />
         </Box>
+        </div>
         </div>
     );
 }

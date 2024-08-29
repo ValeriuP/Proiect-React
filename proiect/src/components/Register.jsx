@@ -5,6 +5,8 @@ import { useAuth } from '../contexts/authContext';
 import { doCreateUserWithEmailAndPassword } from '../../auth'; 
 import { setDoc,doc,collection } from 'firebase/firestore'; 
 import { db,} from '../../firebase';
+import './Register.css'
+
 
 function Register() {
     const [firstName, setFirstName] = useState("");
@@ -63,17 +65,24 @@ function Register() {
     }, [currentUser, navigate]);
 
     return (
-        <Box
+        <div className="registration__container">
+        <Box 
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '80vh',
+              
                 
             }}
         >
-            <TextField
+              {/* Title for the registration form */}
+              <Typography variant="h4" sx={{ marginBottom: 4, color:'#3E482A'}} >
+               Sign Up
+            </Typography>
+
+            <TextField 
                 required
                 id="firstName"
                 label="First Name"
@@ -93,11 +102,17 @@ function Register() {
                 required
                 id="birthdate"
                 label="Birthdate"
-                type="date"
-                InputLabelProps={{ shrink: true }}
+            type="date" 
+                InputLabelProps={{ shrink: true, 
+                    sx:{
+                        top:'15px'
+                    }
+                }}
                 value={birthdate}
                 onChange={(e) => setBirthdate(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px'
+                 
+                 }}
             />
             <TextField
                 required
@@ -119,17 +134,24 @@ function Register() {
                 sx={{ marginBottom: 2, width: '250px' }}
             />
             <Button
+            
                 variant="contained"
                 onClick={handleClick}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px' , backgroundColor: '#3E482A', color:'#aaaaa2', '&:hover':{
+                    backgroundColor:'#3E482A', color:'#79804D'
+                }
+                  }}
                 disabled={isReg}
+              
             >
                 Register
             </Button>
-            <Typography variant="body2">
-                Aveți cont? <Link to="/login">Login</Link>
+            <Typography variant="body2"  sx={{ color:'#3E482A'}}>
+                Already have an account? <Link to="/login" className="link-style">
+                Log In</Link>
             </Typography>
         </Box>
+        </div>
     );
 }
 
