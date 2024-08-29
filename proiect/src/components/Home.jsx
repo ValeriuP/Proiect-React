@@ -1,12 +1,9 @@
-import React,{useEffect,useState} from "react";
-import { useNavigate,Outlet,Link,useLocation } from "react-router-dom";
+import {useEffect,useState} from "react";
+import { useNavigate,Link,useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import { Button,Box,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Toolbar } from "@mui/material";
-import { doCreateUserWithEmailAndPassword}from "../../auth";
-import { setDoc,doc } from "firebase/firestore";
+import { Button,Toolbar } from "@mui/material";
 import { db } from "../../firebase";
-import { collection,getDoc,getDocs,deleteDoc } from "firebase/firestore";
-import Header from "./Header";
+import { collection,getDoc,getDocs,doc } from "firebase/firestore";
 import AllFlats from "./Allflats";
 import '../Home.css';
 
@@ -14,9 +11,9 @@ import '../Home.css';
 function Home(){
     const navigate= useNavigate();
     const {currentUser,userLoggedIn,loading}=useAuth();
-    const [users,setUsers]=useState([]);
-    const [isAdmin,setIsAdmin]=useState(false);
-    const [editData, setEditData]= useState({});
+    // const [users,setUsers]=useState([]);
+     const [isAdmin,setIsAdmin]=useState(false);
+    // const [editData, setEditData]= useState({});
     const location =useLocation();
     const [showAllFlats,setShowAllFlats]=useState(true);
     

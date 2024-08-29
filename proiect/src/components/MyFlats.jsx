@@ -19,7 +19,6 @@ function MyFlats(){
 
         };
         fetchFlats();
-
     },[currentUser]);
 
     return(
@@ -45,13 +44,13 @@ function MyFlats(){
                     flats.map(flat=>(
                         <TableRow key={flat.id}>
                         <TableCell>{flat.city}</TableCell>
-                        <TableCell>{flat.stretName}</TableCell>
-                        <TableCell>{flat.stretNumber}</TableCell>
+                        <TableCell>{flat.streetName}</TableCell>
+                        <TableCell>{flat.streetNumber}</TableCell>
                          <TableCell>{flat.areaSize}</TableCell>
-                         <TableCell>{flat.hasAc}</TableCell>
+                         <TableCell>{flat.ac}</TableCell>
                          <TableCell>{flat.yearBuilt}</TableCell>
                          <TableCell>{flat.rentPrice}</TableCell>
-                         <TableCell>{flat.dateAvailble}</TableCell>
+                         <TableCell>{flat.dateAvailable}</TableCell>
                          <TableCell>
                             <Button variant="outlined">Favorit</Button>
                             <Button variant="outlined">Delete</Button>

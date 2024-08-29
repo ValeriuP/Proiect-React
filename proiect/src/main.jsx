@@ -1,15 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
 import './index.css';
-import { createBrowserRouter,Navigate,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/authContext.jsx';
 
 import Register from './components/Register.jsx';
 import Login from './components/Login.jsx';
 import Home from './components/Home.jsx';
 import AddFlat from './components/addFlats.jsx';
-import AllFlats from './components/AllFlats.jsx';
+import AllFlats from './components/Allflats.jsx';
 import MyProfiles from './components/MyProfiles.jsx';
 import UsersProfiles from './components/UsersProfiles.jsx';
 import MyFlats from './components/MyFlats.jsx';

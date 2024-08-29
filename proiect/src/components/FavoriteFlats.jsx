@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,Paper,ToggleButton,ToggleButtonGroup }  from "@mui/material";
+import { Button,Table,TableBody,TableContainer,TableRow,TableCell,Paper }  from "@mui/material";
 import { doc,deleteDoc,getDocs,collection,query,where } from "firebase/firestore";
-import { Try } from "@mui/icons-material";
+import {TableHead} from "@mui/material";
 import Header from "./Header";
 
 function FavoriteFlats(){
@@ -49,8 +49,8 @@ function FavoriteFlats(){
    
   }catch (error) {
         console.error('Error deleting favorite:', error);
-
-};
+    }
+}
 return (
     <div>
         <div>
@@ -99,6 +99,6 @@ return (
 </div>
 
 );
-}
+
 }
 export default FavoriteFlats;
