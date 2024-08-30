@@ -47,7 +47,7 @@ function Login() {
                 height: '70vh',
             }}
         >
-               <Typography variant="h4" sx={{ marginBottom: 4, color:'#3E482A'}} >
+               <Typography variant="h4" sx={{ marginBottom: 4, color:'#aaaaa2'}} >
                Sign In
             </Typography>
 
@@ -71,14 +71,15 @@ function Login() {
             <Button
                 variant="contained"
                 onClick={handleLogin}
-                sx={{ marginBottom: 2, width: '210px' , backgroundColor: '#3E482A', color:'#aaaaa2', '&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'
+                sx={{ marginBottom: 2, width: '210px' , color:' #aaaaa2', backgroundColor: 'rgba(0, 0, 0, 0.5)',  '&:hover':{
+                    backgroundColor:' #aaaaa2', color:'black'
                 }}}
             >
                 Login
             </Button>
-            <Typography variant="body2" sx={{ color:'#3E482A', marginTop: 3}}>
-                Don't have an account? <Link to="/register" className="link-register-style">Register</Link>
+            <Typography variant="body2" sx={{ color:'#aaaaa2', marginTop: 3}}>
+                Don't have an account? 
+                <Link to="/register" className="link-register-style">Register</Link>
             </Typography>
         </Box>
         </div>

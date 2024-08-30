@@ -3,6 +3,8 @@ import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../../auth";
 import { Button, Box, Typography } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+
 import './Header.css';
 
 function Header() {
@@ -28,45 +30,52 @@ function Header() {
     }
 
     return (
+    
         <div className="navbar__container">
+
+            <HomeIcon  sx={{ fontSize: 40, color:' #dcdcdc' }}/>
+
+            <h2 className='logo__name' >FlatFinder</h2>
+          
             <div className="hello">
                 <Typography variant="body1" sx={{
-                                color:' #3E482A'
+                                color:' #dcdcdc'
                             }} >
                     Hello, {currentUser?.email}
                 </Typography>
             </div>
             <div> <Typography variant="h6" sx={{
                 textTransform:'uppercase', 
-                    color:' #3E482A'
+                    color:' #dcdcdc',
+                    padding:'100px'
                 
             }}>{renderSwitch(location.pathname)}</Typography></div>
             <Box component="nav">
                 <div className="components__pagename">
                
                     <Button sx={{
-                                color:' #3E482A','&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'}
+                                color:' #dcdcdc','&:hover':{
+                    backgroundColor:'black', color:'#dcdcdc'}
                             }}
                               color="inherit" component={Link} to="/">Home</Button>
                     <Button sx={{
-                                color:' #3E482A','&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'}
+                                color:'#dcdcdc','&:hover':{
+                    backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                             color="inherit" component={Link} to="/my-profiles">My Profile</Button>
                     <Button  sx={{
-                                color:' #3E482A', '&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'}
+                                color:' #dcdcdc', '&:hover':{
+                    backgroundColor:'black', color:'#dcdcdc'}
                             }} 
-                            color="inherit" component={Link} to="/all-flats">All Flats</Button>
+                            color="inherit" component={Link} to="/all-flats">Messages</Button>
                    
                 
                 <Box>
                     {userLoggedIn ? (
                         <>
                             <Button sx={{
-                                color:' #3E482A','&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'}
+                                color:'#dcdcdc','&:hover':{
+                    backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                                 onClick={() => {
                                     doSignOut().then(() => {
@@ -86,6 +95,7 @@ function Header() {
                 </Box>   
                   </div>
             </Box>
+           
         </div>
     );
 }

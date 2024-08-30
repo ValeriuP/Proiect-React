@@ -1,16 +1,18 @@
 .login__container{
     padding-bottom: 80px;
-    border: 2px solid  #79804D;
+    border: 2px solid rgba(0, 0, 0, 0.5) ;
     border-radius: 10px;
     width: 400px;
     height:500px;
     margin-top: 60px;
-    background-color: #79804D;
+    background-color: rgba(0, 0, 0, 0.5);
+
     }
     .link-register-style{
-        color: #3E482A;
+        color: #aaaaa2;
+        padding-left: 10px;
     }
     .link-register-style:hover{
-        color: #3E482A;
+        color: #aaaaa2;
         text-decoration-line: underline;
     }

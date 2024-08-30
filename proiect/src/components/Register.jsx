@@ -78,7 +78,7 @@ function Register() {
             }}
         >
               {/* Title for the registration form */}
-              <Typography variant="h4" sx={{ marginBottom: 4, color:'#3E482A'}} >
+              <Typography variant="h4" sx={{ marginBottom: 4, color:'#aaaaa2'}} >
                Sign Up
             </Typography>
 
@@ -137,8 +137,8 @@ function Register() {
             
                 variant="contained"
                 onClick={handleClick}
-                sx={{ marginBottom: 2, width: '250px' , backgroundColor: '#3E482A', color:'#aaaaa2', '&:hover':{
-                    backgroundColor:'#3E482A', color:'#79804D'
+                sx={{ marginBottom: 2, width: '250px' , color:' #aaaaa2', backgroundColor: 'rgba(0, 0, 0, 0.5)',  '&:hover':{
+                    backgroundColor:' #aaaaa2', color:'black'
                 }
                   }}
                 disabled={isReg}
@@ -146,7 +146,7 @@ function Register() {
             >
                 Register
             </Button>
-            <Typography variant="body2"  sx={{ color:'#3E482A'}}>
+            <Typography variant="body2"  sx={{ color:'#aaaaa2'}}>
                 Already have an account? <Link to="/login" className="link-style">
                 Log In</Link>
             </Typography>
