@@ -3,7 +3,7 @@
 
 body{
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    background-image: url(C:\Users\Lenovo\Documents\GitHub\Proiect-React\proiect\src\assets\modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg);
+    background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg");
 background-repeat: no-repeat;
 background-size: cover;
 }
