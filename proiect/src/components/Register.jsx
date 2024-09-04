@@ -66,6 +66,7 @@ function Register() {
 
     return (
         <div className="registration__container">
+            <p> daiana buna ziua</p>
         <Box 
             sx={{
                 display: 'flex',
