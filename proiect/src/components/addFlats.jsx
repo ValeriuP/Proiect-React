@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { addDoc,collection } from "firebase/firestore";
 import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,Paper,ToggleButton,ToggleButtonGroup }  from "@mui/material";
+import { Link} from "react-router-dom";
 
 
 
@@ -73,157 +74,172 @@ import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,Tabl
     };
 
     return (
-        <Container sx={{ maxWidth: '100%', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'start', minHeight: '100vh' }}>
-            <TableContainer component={Paper} sx={{ width: '450px', padding: 1 }}>
-                <Table sx={{ minWidth: 300 }}>
-                    <TableBody>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="city"
-                                    label="City"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.city}
-                                    helperText={isSubmitted && errors.city}
-                                />
-                            </TableCell>
-                        </TableRow>
+    <Container sx={{ maxWidth: '100%', paddingTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'start', minHeight: '100vh' }}>
+        <TableContainer sx={{ width: '450px', padding: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+            <Table sx={{ minWidth: 300 }}>
+                <TableBody>
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="city"
+                                label="City"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }} 
+                                error={isSubmitted && !!errors.city}
+                                helperText={isSubmitted && errors.city}
+                            />
+                        </TableCell>
+                    </TableRow>
 
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="streetName"
-                                    label="Street Name"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.streetName}
-                                    helperText={isSubmitted && errors.streetName}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="streetNumber"
-                                    label="Street Number"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.streetNumber}
-                                    helperText={isSubmitted && errors.streetNumber}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="areaSize"
-                                    label="Area Size"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.areaSize}
-                                    helperText={isSubmitted && errors.areaSize}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <ToggleButtonGroup
-                                    value={flatData.ac}
-                                    exclusive
-                                    onChange={handleACChange}
-                                    aria-label="Toggle Button"
-                                    sx={{ width: '100%' }}
-                                >
-                                    <ToggleButton value="yes" sx={{ height: '30px' }}>Has AC</ToggleButton>
-                                    <ToggleButton value="no" sx={{ height: '30px' }}>No AC</ToggleButton>
-                                </ToggleButtonGroup>
-                                {isSubmitted && errors.ac && <div style={{ color: 'red', fontSize: '12px' }}>{errors.ac}</div>}
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="yearBuilt"
-                                    label="Year Built"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.yearBuilt}
-                                    helperText={isSubmitted && errors.yearBuilt}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="rentPrice"
-                                    label="Rent Price"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.rentPrice}
-                                    helperText={isSubmitted && errors.rentPrice}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    required
-                                    id="dateAvailable"
-                                    label="Date Available"
-                                    type="date"
-                                    InputLabelProps={{ shrink: true }}
-                                    value={flatData.dateAvailable}
-                                    onChange={handleDateChange}
-                                    sx={{ marginBottom: 0, width: '100%' }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.dateAvailable}
-                                    helperText={isSubmitted && errors.dateAvailable}
-                                />
-                            </TableCell>
-                        </TableRow>
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="streetName"
+                                label="Street Name"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }} 
+                                error={isSubmitted && !!errors.streetName}
+                                helperText={isSubmitted && errors.streetName}
+                            />
+                        </TableCell>
+                    </TableRow>
 
-                        <TableRow sx={{ height: '40px' }}>
-                            <TableCell sx={{ padding: '10px 8px' }}>
-                                <TextField
-                                    name="ownerEmail"
-                                    label="Email Owner"
-                                    onChange={handleChange}
-                                    sx={{ width: '100%', margin: 0 }}
-                                    InputProps={{ sx: { height: '40px' } }}
-                                    error={isSubmitted && !!errors.ownerEmail}
-                                    helperText={isSubmitted && errors.ownerEmail}
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell align="center" sx={{ padding: '4px 8px' }}>
-                                <Button
-                                    onClick={handleSubmit}
-                                    sx={{
-                                        backgroundColor: 'green',
-                                        color: 'white',
-                                        width: '100px',
-                                        height: '30px',
-                                        marginTop: 1
-                                    }}
-                                    disabled={isFormValid}
-                                >
-                                    Save
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Container>
-    );
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="streetNumber"
+                                label="Street Number"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }}
+                                error={isSubmitted && !!errors.streetNumber}
+                                helperText={isSubmitted && errors.streetNumber}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="areaSize"
+                                label="Area Size"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }} 
+                                error={isSubmitted && !!errors.areaSize}
+                                helperText={isSubmitted && errors.areaSize}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="yearBuilt"
+                                label="Year Built"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }} 
+                                error={isSubmitted && !!errors.yearBuilt}
+                                helperText={isSubmitted && errors.yearBuilt}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="rentPrice"
+                                label="Rent Price"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }}
+                                error={isSubmitted && !!errors.rentPrice}
+                                helperText={isSubmitted && errors.rentPrice}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                required
+                                id="dateAvailable"
+                                label="Date Available"
+                                type="date"
+                                InputLabelProps={{ shrink: true, sx: { color: '#dcdcdc' } }} 
+                                value={flatData.dateAvailable}
+                                onChange={handleDateChange}
+                                sx={{ marginBottom: 0, width: '100%' }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                error={isSubmitted && !!errors.dateAvailable}
+                                helperText={isSubmitted && errors.dateAvailable}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
+                        <TableCell sx={{ padding: '10px 8px' }}>
+                            <TextField
+                                name="ownerEmail"
+                                label="Email Owner"
+                                onChange={handleChange}
+                                sx={{ width: '100%', margin: 0 }}
+                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
+                                InputLabelProps={{ sx: { color: '#dcdcdc' } }}
+                                error={isSubmitted && !!errors.ownerEmail}
+                                helperText={isSubmitted && errors.ownerEmail}
+                            />
+                        </TableCell>
+                    </TableRow>
+
+                    <TableRow>
+                        <TableCell align="center" sx={{ padding: '4px 8px', color: 'white' }}>
+                        <Button
+                               
+                                sx={{
+                                    backgroundColor: 'green',
+                                    color: 'white',
+                                    width: '100px',
+                                    height: '30px',
+                                    marginTop: 1, backgroundColor:'rgba(0, 0, 0, 0.9)',marginInline:2,  color:'#dcdcdc', '&:hover':{
+                                        backgroundColor:'#dcdcdc', color:'#dcdcdc'}
+                                }}
+                                component={Link}
+    to="/"
+                            >
+                             Cancel
+                            </Button>
+                            <Button
+                                onClick={handleSubmit}
+                                sx={{
+                                    backgroundColor: 'green',
+                                    color: 'white',
+                                    width: '100px',
+                                    height: '30px',
+                                    marginTop: 1, backgroundColor:'rgba(0, 0, 0, 0.9)',  color:'#dcdcdc', '&:hover':{
+                                        backgroundColor:'#dcdcdc', color:'#dcdcdc'}
+                                }}
+                                disabled={isFormValid}
+                            >
+                                Save
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </Container>
+);
+
 
     }
     export default AddFlat;

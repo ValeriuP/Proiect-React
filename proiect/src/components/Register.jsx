@@ -147,7 +147,8 @@ function Register() {
                 Register
             </Button>
             <Typography variant="body2"  sx={{ color:'#aaaaa2'}}>
-                Already have an account? <Link to="/login" className="link-style">
+                Already have an account?
+                 <Link to="/login" className="link-style">
                 Log In</Link>
             </Typography>
         </Box>

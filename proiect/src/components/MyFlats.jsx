@@ -4,6 +4,9 @@ import { db } from "../../firebase";
 import { getDocs,collection,query,where, doc } from "firebase/firestore";
 import { Table,TableCell,TableBody,TableHead,TableContainer,TableRow,Button,Paper } from "@mui/material";
 import Header from "./Header";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
+
 
 function MyFlats(){
     const {currentUser}=useAuth();
@@ -26,35 +29,40 @@ function MyFlats(){
             <div>
                 <Header />
             </div>
-        <TableContainer component={Paper}>
+
+         <TableContainer  sx={{marginTop:'80px', backgroundColor:' rgba(0, 0, 0, 0.7)'}}>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>City</TableCell>
-                        <TableCell>Stret Name</TableCell>
-                        <TableCell>Stret Number</TableCell>
-                        <TableCell>Area Size</TableCell>
-                        <TableCell>Has AC</TableCell>
-                        <TableCell>Year Built</TableCell>
-                        <TableCell>Rent Price</TableCell>
-                        <TableCell>Date Availabe</TableCell>
+                    <TableRow sx={{height:100}}> 
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>City</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Stret Name</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Stret Number</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Area Size</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Has AC</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Year Built</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Rent Price</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Date Availabe</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>{
                     flats.map(flat=>(
-                        <TableRow key={flat.id}>
-                        <TableCell>{flat.city}</TableCell>
-                        <TableCell>{flat.streetName}</TableCell>
-                        <TableCell>{flat.streetNumber}</TableCell>
-                         <TableCell>{flat.areaSize}</TableCell>
-                         <TableCell>{flat.ac}</TableCell>
-                         <TableCell>{flat.yearBuilt}</TableCell>
-                         <TableCell>{flat.rentPrice}</TableCell>
-                         <TableCell>{flat.dateAvailable}</TableCell>
-                         <TableCell>
-                            <Button variant="outlined">Favorit</Button>
-                            <Button variant="outlined">Delete</Button>
-                         </TableCell>
+                        <TableRow key={flat.id} >
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'capitalize'}}>{flat.city}</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'capitalize'}}>{flat.streetName}</TableCell>
+                        <TableCell sx={{color:'#dcdcdc'}}>{flat.streetNumber}</TableCell>
+                         <TableCell sx={{color:'#dcdcdc'}}>{flat.areaSize}</TableCell>
+                         <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>{flat.ac}</TableCell>
+                         <TableCell sx={{color:'#dcdcdc'}}>{flat.yearBuilt}</TableCell>
+                         <TableCell sx={{color:'#dcdcdc'}}>{flat.rentPrice}</TableCell>
+                         <TableCell sx={{color:'#dcdcdc'}}>{flat.dateAvailable}</TableCell>
+                         
+                            <Button  sx={{color:'#dcdcdc', '&:hover':{
+                    backgroundColor:' #aaaaa2', color:'black'
+                }}}>Favorite</Button>
+                            <Button  sx={{color:'#dcdcdc', '&:hover':{
+                    backgroundColor:' #aaaaa2', color:'black'
+                }}}>Delete</Button>
+                        
 
                         </TableRow>
                     ))
@@ -62,7 +70,13 @@ function MyFlats(){
 
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer> 
+      <div  style={{ display: 'flex', justifyContent: 'flex-end' }}> <Button  sx={{
+                                color:'  rgba(0, 0, 0, 0.9)',fontSize:'20px',width:100,backgroundColor:'#dcdcdc',marginTop:5, '&:hover':{
+                    backgroundColor:'rgba(0, 0, 0, 0.9)', color:' #dcdcdc'}
+                            }} 
+                            color="inherit" component={Link} to="/">Back</Button> </div> 
+
         </div>
     );
 }

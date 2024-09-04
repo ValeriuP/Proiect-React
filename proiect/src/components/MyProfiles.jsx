@@ -5,6 +5,7 @@ import { doc,getDoc,updateDoc,deleteDoc } from "firebase/firestore";
 import { updatePassword as firebaseUpdatePassword  } from "firebase/auth";
 import Header from "./Header";
 import { Button,Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,TextField,Typography,Grid,Card } from "@mui/material";
+import './MyProfile.css';
 
 const MyProfiles = () => {
     const { currentUser } = useAuth();
@@ -124,10 +125,13 @@ const MyProfiles = () => {
             <Header />
             <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '80vh' }}>
                 <Grid item xs={12} sm={8} md={6}>
-                    <Card>
+                    <div className="card__container">
+                    <Card sx={{
+                        backgroundColor:'rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                    }}>
                         <CardContent>
                             <Typography variant="h5" align="center" gutterBottom>
-                            User Profile
+                          My Profile
                             </Typography>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
@@ -142,8 +146,11 @@ const MyProfiles = () => {
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="body1"><strong>Date of Birth:</strong> {userData.birthdate}</Typography>
                                 </Grid>
-                                <Grid item xs={5} sm={5}>
-                                    <Button color="primary" onClick={handleEditOpen}>
+                                <Grid item xs={5} sm={5}  >
+                                    <Button color="primary" onClick={handleEditOpen} sx={{backgroundColor:'rgba(0, 0, 0, 0.9)',
+                     color:'#dcdcdc','&:hover':{
+                    backgroundColor:'#dcdcdc', color:'black'}
+                }}>
                                      Edit <Button />
                                     </Button>
                                 </Grid>
@@ -157,16 +164,24 @@ const MyProfiles = () => {
                             </Grid>
                         </CardContent>
                     </Card>
+                    </div>
                 </Grid>
             </Grid>
 
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Editare Profil</DialogTitle>
-                <DialogContent>
+            <Dialog open={open} onClose={handleClose} sx={{
+                backgroundColor:'rgba(0, 0, 0, 0.5)'
+            }}>
+                <DialogTitle
+                sx={{
+                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:' rgba(0, 0, 0, 0.7)', textTransform:'uppercase',
+                }}>Edit Profile</DialogTitle>
+                <DialogContent   sx={{
+                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                }}>
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="Prenume"
+                        label="First Name"
                         name="firstName"
                         fullWidth
                         value={editData.firstName}
@@ -174,7 +189,7 @@ const MyProfiles = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Nume"
+                        label="Second Name"
                         name="lastName"
                         fullWidth
                         value={editData.lastName}
@@ -190,7 +205,7 @@ const MyProfiles = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Data nașterii"
+                        label="Date of Birth"
                         name="birthdate"
                         type="date"
                         fullWidth
@@ -200,7 +215,7 @@ const MyProfiles = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Parolă Nouă"
+                        label="New Password"
                         name="password"
                         type="password"
                         fullWidth
@@ -208,12 +223,18 @@ const MyProfiles = () => {
                         onChange={handlePasswordChange}
                     />
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Anulează
+                <DialogActions   sx={{
+                    backgroundColor:' rgba(0, 0, 0, 0.5)'
+                }}>
+                    <Button onClick={handleClose} color="primary"  sx={{
+                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                }}>
+                        Cancel
                     </Button>
-                    <Button onClick={handleUpdate} color="primary">
-                        Actualizează
+                    <Button onClick={handleUpdate} color="primary"  sx={{
+                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                }}> 
+                       Update
                     </Button>
                 </DialogActions>
             </Dialog>

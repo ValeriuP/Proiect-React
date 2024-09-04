@@ -1,4 +1,4 @@
-import {useEffect,useState} from "react";
+import React,{useEffect,useState} from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
 import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
@@ -6,7 +6,8 @@ import {Box,TextField,IconButton} from "@mui/material"
 import {DataGrid} from "@mui/x-data-grid";//nu functioneaza da eroare
 import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' //nu functioneaza da eroare
 import Header from "./Header";
-
+import { Link} from "react-router-dom";
+import {Button } from "@mui/material";
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);
@@ -79,14 +80,19 @@ function AllFlats() {
             width: 150,
             renderCell: (params) => (
                 <>
-                    <IconButton onClick={() => handleFavorite(params.row.id)}>
-                        {favoriteFlats.includes(params.row.id) ? <Favorite sx={{ color: 'red' }} /> : <FavoriteBorder />}
-                    </IconButton>
-                    <IconButton
-                        onClick={() => window.location.href = `mailto:${params.row.ownerEmail}`} // Trimite email către proprietar
-                    >
-                        <Send />
-                    </IconButton>
+                  <IconButton onClick={() => handleFavorite(params.row.id)}>
+    {favoriteFlats.includes(params.row.id) ? (
+        <Favorite sx={{ color: '#dcdcdc',  }} />  
+    ) : (
+        <FavoriteBorder sx={{ color: '#dcdcdc' }} />  
+    )}
+</IconButton>
+<IconButton
+    onClick={() => window.location.href = `mailto:${params.row.ownerEmail}`}
+>
+    <Send sx={{ color: '#dcdcdc' }} /> 
+</IconButton>
+
                 </>
             ),
         },
@@ -95,30 +101,94 @@ function AllFlats() {
     return (
         <div>
             <Header />
-            <div className="table__container">
+            
         <Box 
        
         >
-            <TextField
-                variant="outlined"
-                placeholder="Search..."
-                onChange={handleSearch}
-                sx={{ marginBottom: 3, marginTop: 3, width: '200px', backgroundColor:' #79804D', }}
-            />
+           <TextField
+    variant="outlined"
+    placeholder="Search..."
+    onChange={handleSearch}
+    sx={{ 
+        marginBottom: 3, 
+        marginTop: 4, 
+        width: '200px', 
+        borderRadius: 2, 
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        color: '#dcdcdc',
+        '& .MuiOutlinedInput-root': {
+            '&::placeholder': {
+                color: '#dcdcdc', // Customize placeholder color
+                opacity: 1, // Ensures opacity is set for color to take effect
+            },
+        },
+    }}
+    InputProps={{
+        style: {
+            color: '#dcdcdc', // Customize text color
+        },
+    }}
+/>
 
-            <DataGrid 
-                rows={filteredFlats}
-                columns={columns}
-                pageSize={12}
-                rowsPerPageOptions={[12]}
-                disableSelectionOnClick
-                autoHeight
-                sx={{ backgroundColor:' #79804D',  }}
- 
-            />
+
+<DataGrid 
+    rows={filteredFlats}
+    columns={columns}
+    pageSize={12}
+    rowsPerPageOptions={[12]}
+    disableSelectionOnClick
+    autoHeight
+    sx={{ 
+        '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#333333',  // Header background color
+            color: 'rgba(0, 0, 0, 0.9)',  // Header text color
+            fontSize: '16px', 
+            textTransform: 'uppercase',   // Header font size
+        },
+        '& .MuiDataGrid-row': {
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',  // Row background color
+            color: '#dcdcdc',                       // Row text color
+            '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',         // Row hover background color
+                color: '#dcdcdc',        // Row hover text color
+            },
+        },
+        '& .MuiDataGrid-cell': {
+            borderColor: '#cccccc',                 // Cell border color
+        },
+        '& .MuiDataGrid-cell.Mui-selected': {
+            backgroundColor: '#555555',             // Selected cell background color
+            color: 'rgba(0, 0, 0, 0.6)',                       // Selected cell text color
+        },
+        '& .MuiDataGrid-row.Mui-selected': {
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',             // Selected row background color
+            color: '#ffffff',                       // Selected row text color
+        },
+    }}
+/>
+
         </Box>
+        <div  style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button
+    sx={{
+        color: 'rgba(0, 0, 0, 0.9)',
+        fontSize: '20px',
+        width: 100,
+        backgroundColor: '#dcdcdc',
+        marginTop: 5,
+        '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: '#dcdcdc'
+        }
+    }}
+    component={Link}
+    to="/"
+>
+    Back
+</Button>
+</div>
         </div>
-        </div>
+        
     );
 }
 

@@ -67,7 +67,7 @@ function Header() {
                                 color:' #dcdcdc', '&:hover':{
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
-                            color="inherit" component={Link} to="/all-flats">Messages</Button>
+                            color="inherit" component={Link} to="/messages">Messages</Button>
                    
                 
                 <Box>
