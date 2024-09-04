@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/authContext";
 import { Button,Toolbar } from "@mui/material";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,doc } from "firebase/firestore";
-import AllFlats from "./Allflats";
+import AllFlats from "./AllFlats";
 import './Home.css'
 import Header from "./Header";
 
