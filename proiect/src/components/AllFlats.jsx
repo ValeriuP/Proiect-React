@@ -136,9 +136,11 @@ function AllFlats() {
     columns={columns}
     pageSize={12}
     rowsPerPageOptions={[12]}
-    disableSelectionOnClick
+    disableRowSelectionOnClick
     autoHeight
-    sx={{ 
+    sx={{ "&.MuiDataGrid-root .MuiDataGrid-cell:focus": {
+          outline: "none",
+        },
         '& .MuiDataGrid-columnHeaders': {
             backgroundColor: '#333333',  // Header background color
             color: 'rgba(0, 0, 0, 0.9)',  // Header text color
@@ -164,6 +166,11 @@ function AllFlats() {
             backgroundColor: 'rgba(0, 0, 0, 0.6)',             // Selected row background color
             color: '#ffffff',                       // Selected row text color
         },
+       
+            '.MuiDataGrid-menuIcon': {
+                visibility: 'visible !important',
+                width: "auto !important",
+            }
     }}
 />
 

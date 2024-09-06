@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import { addDoc,collection } from "firebase/firestore";
 import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,Paper,ToggleButton,ToggleButtonGroup }  from "@mui/material";
 import { Link} from "react-router-dom";
+import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typography,Grid,Card } from "@mui/material";
 
 
 
@@ -74,8 +75,12 @@ import { Link} from "react-router-dom";
     };
 
     return (
+        
     <Container sx={{ maxWidth: '100%', paddingTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'start', minHeight: '100vh' }}>
-        <TableContainer sx={{ width: '450px', padding: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <TableContainer sx={{ width: '450px', padding: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <Typography variant="h5" sx={{ color: '#dcdcdc', display:'flex', justifyContent:'center', textTransform:'uppercase' }}>
+        Add Flat
+    </Typography>
             <Table sx={{ minWidth: 300 }}>
                 <TableBody>
                     <TableRow sx={{ height: '40px' }}>
@@ -210,8 +215,8 @@ import { Link} from "react-router-dom";
                                     color: 'white',
                                     width: '100px',
                                     height: '30px',
-                                    marginTop: 1, backgroundColor:'rgba(0, 0, 0, 0.9)',marginInline:2,  color:'#dcdcdc', '&:hover':{
-                                        backgroundColor:'#dcdcdc', color:'#dcdcdc'}
+                                    marginTop: 1, backgroundColor:'#dcdcdc',marginInline:2,  color:'rgba(0, 0, 0, 0.9)', '&:hover':{
+                                        backgroundColor:'rgba(0, 0, 0, 0.9)', color:'#dcdcdc'}
                                 }}
                                 component={Link}
     to="/"
@@ -226,7 +231,7 @@ import { Link} from "react-router-dom";
                                     width: '100px',
                                     height: '30px',
                                     marginTop: 1, backgroundColor:'rgba(0, 0, 0, 0.9)',  color:'#dcdcdc', '&:hover':{
-                                        backgroundColor:'#dcdcdc', color:'#dcdcdc'}
+                                        backgroundColor:'#dcdcdc', color:'rgba(0, 0, 0, 0.9)'}
                                 }}
                                 disabled={isFormValid}
                             >

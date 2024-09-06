@@ -123,14 +123,14 @@ const MyProfiles = () => {
     return (
         <Box>
             <Header />
-            <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '80vh' }}>
+            <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '80vh',  }}>
                 <Grid item xs={12} sm={8} md={6}>
                     <div className="card__container">
                     <Card sx={{
-                        backgroundColor:'rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                        backgroundColor:'rgba(0, 0, 0, 0.5)', color:'#dcdcdc'
                     }}>
                         <CardContent>
-                            <Typography variant="h5" align="center" gutterBottom>
+                            <Typography variant="h5" align="center" gutterBottom sx={{textTransform:'uppercase'}}>
                           My Profile
                             </Typography>
                             <Grid container spacing={2}>
@@ -147,9 +147,9 @@ const MyProfiles = () => {
                                     <Typography variant="body1"><strong>Date of Birth:</strong> {userData.birthdate}</Typography>
                                 </Grid>
                                 <Grid item xs={5} sm={5}  >
-                                    <Button color="primary" onClick={handleEditOpen} sx={{backgroundColor:'rgba(0, 0, 0, 0.9)',
-                     color:'#dcdcdc','&:hover':{
-                    backgroundColor:'#dcdcdc', color:'black'}
+                                    <Button color="primary" onClick={handleEditOpen} sx={{backgroundColor:'#dcdcdc',
+                     color:'rgba(0, 0, 0, 0.9)','&:hover':{
+                    backgroundColor:'rgba(0, 0, 0, 0.9)', color:'#dcdcdc'}
                 }}>
                                      Edit <Button />
                                     </Button>
@@ -173,66 +173,176 @@ const MyProfiles = () => {
             }}>
                 <DialogTitle
                 sx={{
-                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:' rgba(0, 0, 0, 0.7)', textTransform:'uppercase',
+                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:' #dcdcdc', textTransform:'uppercase',
                 }}>Edit Profile</DialogTitle>
-                <DialogContent   sx={{
-                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
-                }}>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        label="First Name"
-                        name="firstName"
-                        fullWidth
-                        value={editData.firstName}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Second Name"
-                        name="lastName"
-                        fullWidth
-                        value={editData.lastName}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Email"
-                        name="email"
-                        fullWidth
-                        value={editData.email}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Date of Birth"
-                        name="birthdate"
-                        type="date"
-                        fullWidth
-                        InputLabelProps={{ shrink: true }}
-                        value={editData.birthdate}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        label="New Password"
-                        name="password"
-                        type="password"
-                        fullWidth
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                </DialogContent>
+                <DialogContent
+        sx={{
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Background color with transparency
+            color: '#dcdcdc', // Text color
+            padding: 3, // Add padding to the content
+        }}
+    >
+        <Box
+            component="form"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2, // Space between TextFields
+                width:300
+            }}
+        >
+            <TextField
+                autoFocus
+                margin="dense"
+                label="First Name"
+                name="firstName"
+                fullWidth
+                value={editData.firstName}
+                onChange={handleChange}
+                sx={{
+                    '& .MuiInputLabel-root': {
+                        color: '#dcdcdc', // Label color
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#dcdcdc', // Border color
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#dcdcdc', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#dcdcdc', // Border color when focused
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        color: '#dcdcdc', // Input text color
+                    },
+                }}
+            />
+            <TextField
+                margin="dense"
+                label="Second Name"
+                name="lastName"
+                fullWidth
+                value={editData.lastName}
+                onChange={handleChange}
+                sx={{
+                    '& .MuiInputLabel-root': {
+                        color: '#dcdcdc',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        color: '#dcdcdc',
+                    },
+                }}
+            />
+            <TextField
+                margin="dense"
+                label="Email"
+                name="email"
+                fullWidth
+                value={editData.email}
+                onChange={handleChange}
+                sx={{
+                    '& .MuiInputLabel-root': {
+                        color: '#dcdcdc',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        color: '#dcdcdc',
+                    },
+                }}
+            />
+            <TextField
+                margin="dense"
+                label="Date of Birth"
+                name="birthdate"
+                type="date"
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                value={editData.birthdate}
+                onChange={handleChange}
+                sx={{
+                    '& .MuiInputLabel-root': {
+                        color: '#dcdcdc',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        color: '#dcdcdc',
+                    },
+                }}
+            />
+            <TextField
+                margin="dense"
+                label="New Password"
+                name="password"
+                type="password"
+                fullWidth
+                value={password}
+                onChange={handlePasswordChange}
+                sx={{
+                    '& .MuiInputLabel-root': {
+                        color: '#dcdcdc',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#dcdcdc',
+                        },
+                    },
+                    '& .MuiInputBase-input': {
+                        color: '#dcdcdc',
+                    },
+                }}
+            />
+        </Box>
+    </DialogContent>
+
                 <DialogActions   sx={{
                     backgroundColor:' rgba(0, 0, 0, 0.5)'
                 }}>
-                    <Button onClick={handleClose} color="primary"  sx={{
-                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                    <Button onClick={handleClose} color="primary"  sx={{backgroundColor:' #dcdcdc', color:' rgba(0, 0, 0, 0.9)'
+        
                 }}>
                         Cancel
                     </Button>
                     <Button onClick={handleUpdate} color="primary"  sx={{
-                    backgroundColor:' rgba(0, 0, 0, 0.5)', color:'#dcdcdc',
+                     backgroundColor:' rgba(0, 0, 0, 0.9)', color:'#dcdcdc'
                 }}> 
                        Update
                     </Button>

@@ -41,7 +41,7 @@ function MyFlats(){
                         <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Has AC</TableCell>
                         <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Year Built</TableCell>
                         <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Rent Price</TableCell>
-                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Date Availabe</TableCell>
+                        <TableCell sx={{color:'#dcdcdc', textTransform:'uppercase'}}>Date Available</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>{
