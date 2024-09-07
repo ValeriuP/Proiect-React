@@ -24,6 +24,8 @@ function Header() {
                 return "All Flats";
             case "/my-profiles":
                 return "My Profile";
+             case "/all-users":
+                return "All Users";
             default:
                 return "";
         }
@@ -68,6 +70,11 @@ function Header() {
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                             color="inherit" component={Link} to="/messages">Messages</Button>
+                    <Button sx={{
+                                color:' #dcdcdc','&:hover':{
+                    backgroundColor:'black', color:'#dcdcdc'}
+                            }}
+                              color="inherit" component={Link} to="/all-users">All Users</Button>        
                    
                 
                 <Box>

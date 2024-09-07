@@ -20,6 +20,7 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
             rentPrice: '',
             dateAvailable: '',
             ownerEmail: '',
+            
         });
         const { currentUser } = useAuth()
     const [errors, setErrors] = useState({});
