@@ -1,10 +1,10 @@
-import React,{useEffect,useState} from "react";
+import {useEffect,useState} from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
 import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
 import {Box,TextField,IconButton} from "@mui/material"
-import {DataGrid} from "@mui/x-data-grid";//nu functioneaza da eroare
-import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' //nu functioneaza da eroare
+import {DataGrid} from "@mui/x-data-grid";
+import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' 
 import Header from "./Header";
 import { Link} from "react-router-dom";
 import {Button } from "@mui/material";
@@ -82,7 +82,7 @@ function AllFlats() {
                 <>
                   <IconButton onClick={() => handleFavorite(params.row.id)}>
     {favoriteFlats.includes(params.row.id) ? (
-        <Favorite sx={{ color: '#dcdcdc',  }} />  
+        <Favorite sx={{ color: '#ff0000',  }} />  
     ) : (
         <FavoriteBorder sx={{ color: '#dcdcdc' }} />  
     )}
@@ -120,7 +120,9 @@ function AllFlats() {
             '&::placeholder': {
                 color: '#dcdcdc', // Customize placeholder color
                 opacity: 1, // Ensures opacity is set for color to take effect
+         
             },
+         
         },
     }}
     InputProps={{
