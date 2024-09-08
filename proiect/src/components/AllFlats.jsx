@@ -124,6 +124,9 @@ function AllFlats() {
             },
          
         },
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        },
     }}
     InputProps={{
         style: {

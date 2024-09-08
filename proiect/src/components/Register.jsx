@@ -89,7 +89,9 @@ function Register() {
                 label="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px','& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
             />
             <TextField
                 required
@@ -97,7 +99,9 @@ function Register() {
                 label="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px','& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
             />
             <TextField
                 required
@@ -111,7 +115,9 @@ function Register() {
                 }}
                 value={birthdate}
                 onChange={(e) => setBirthdate(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px'
+                sx={{ marginBottom: 2, width: '250px','& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        },
                  
                  }}
             />
@@ -121,7 +127,9 @@ function Register() {
                 label="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px','& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
                 error={Boolean(errorMessage)}
                 helperText={errorMessage}
             />
@@ -132,7 +140,9 @@ function Register() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                sx={{ marginBottom: 2, width: '250px' }}
+                sx={{ marginBottom: 2, width: '250px','& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
             />
             <Button
             

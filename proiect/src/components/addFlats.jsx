@@ -82,7 +82,9 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
     <Typography variant="h5" sx={{ color: '#dcdcdc', display:'flex', justifyContent:'center', textTransform:'uppercase' }}>
         Add Flat
     </Typography>
-            <Table sx={{ minWidth: 300 }}>
+            <Table sx={{ minWidth: 300,'& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}>
                 <TableBody>
                     <TableRow sx={{ height: '40px' }}>
                         <TableCell sx={{ padding: '10px 8px' }}>

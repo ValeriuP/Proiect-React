@@ -57,7 +57,9 @@ function Login() {
                 label="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                sx={{ marginBottom: 2 }}
+                sx={{ marginBottom: 2, '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
             />
             <TextField
                 required
@@ -66,13 +68,15 @@ function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                sx={{ marginBottom: 2 }}
+                sx={{ marginBottom: 2,'& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'transparent', // Transparent border on focus
+        }, }}
             />
             <Button
                 variant="contained"
                 onClick={handleLogin}
                 sx={{ marginBottom: 2, width: '210px' , color:' #aaaaa2', backgroundColor: 'rgba(0, 0, 0, 0.5)',  '&:hover':{
-                    backgroundColor:' #aaaaa2', color:'black'
+                    backgroundColor:' #aaaaa2', color:'black',
                 }}}
             >
                 Login
