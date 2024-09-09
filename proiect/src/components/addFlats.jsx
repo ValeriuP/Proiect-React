@@ -148,22 +148,53 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
 
                     <TableRow sx={{ height: '40px' }}>
                             <TableCell sx={{ padding: '10px 8px' }}>
-                                <ToggleButtonGroup
-                                    value={flatData.ac}
-                                    exclusive
-                                    onChange={handleACChange}
-                                    aria-label="Toggle Button"
-                                    sx={{ width: '100%' }}
-                                >
-                                    <ToggleButton value="yes" sx={{ height: '30px',color: '#dcdcdc','&:hover':{
-                                        backgroundColor:'#dcdcdc', color:'rgba(0, 0, 0, 0.9)'},'&:focus': {
-      outline: 'none', // Remove focus outline
-    }, }}>Has AC</ToggleButton>
-                                    <ToggleButton value="no" sx={{ height: '30px',color: '#dcdcdc','&:hover':{
-                                        backgroundColor:'#dcdcdc', color:'rgba(0, 0, 0, 0.9)'},'&:focus': {
-      outline: 'none', // Remove focus outline
-    } }}>No AC</ToggleButton>
-                                </ToggleButtonGroup>
+                            <ToggleButtonGroup
+  value={flatData.ac}
+  exclusive
+  onChange={handleACChange}
+  aria-label="Toggle Button"
+  sx={{
+    width: '100%',
+    '& .MuiToggleButtonGroup-grouped': {
+      borderColor: '#dcdcdc', // Border color for the buttons
+      '&.Mui-selected': {
+        backgroundColor: '#dcdcdc', // Background for selected button
+        color: 'rgba(0, 0, 0, 0.9)', // Text color when selected
+        borderColor: 'transparent', // No border when selected
+      },
+      '&.Mui-selected:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.9)', // Hover effect when selected
+        color: '#dcdcdc', // Text color on hover when selected
+      },
+    },
+  }}
+>
+  <ToggleButton
+    value="yes"
+    sx={{
+      height: '30px',
+      color: '#dcdcdc',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.6)', // Hover effect for unselected button
+      },
+    }}
+  >
+    Has AC
+  </ToggleButton>
+  <ToggleButton
+    value="no"
+    sx={{
+      height: '30px',
+      color: '#dcdcdc',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.6)', // Hover effect for unselected button
+      },
+    }}
+  >
+    No AC
+  </ToggleButton>
+</ToggleButtonGroup>
+
                                 {isSubmitted && errors.ac && <div style={{ color: 'red', fontSize: '12px' }}>{errors.ac}</div>}
                             </TableCell>
                         </TableRow>
