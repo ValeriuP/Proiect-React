@@ -1,105 +1,134 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { Button,Table,TableBody,TableContainer,TableRow,TableCell,Paper }  from "@mui/material";
-import { doc,deleteDoc,getDocs,collection,query,where } from "firebase/firestore";
-import {TableHead} from "@mui/material";
+import { Button, Box } from "@mui/material";
+import { doc, deleteDoc, getDocs, collection, query, where } from "firebase/firestore";
 import Header from "./Header";
+import { DataGrid } from "@mui/x-data-grid";
+import { Favorite } from "@mui/icons-material";
 
-function FavoriteFlats(){
-    const {currentUser}=useAuth();
-    const [favoriteFlats,setFavoriteFlats]=useState([]);
+function FavoriteFlats() {
+    const [favoriteFlats, setFavoriteFlats] = useState([]);
+    const { currentUser } = useAuth();
 
-    useEffect(()=>{
-        const nowFavoriteFlats=async ()=> {
-            try{
-                console.log(currentUser);
-                console.log(loading)
-                if(!loading)
-                
-                    console.log("test")
-                const favoriteColection=collection(db,'users',currentUser.uid,'favorites');
-                const favoriteNow=await getDocs(favoriteColection);
-                const flatIdis=favoriteNow.docs.map(doc=>doc.data().flatId);
-                console.log(flatIdis)
+    useEffect(() => {
+        const fetchFavoriteFlats = async () => {
+            try {
+                const favoritesCollection = collection(db, 'users', currentUser.uid, 'favorites');
+                const favoritesSnapshot = await getDocs(favoritesCollection);
+                const flatIds = favoritesSnapshot.docs.map(doc => doc.data().flatId);
 
-                if( flatIdis.length>0) {
-                    const flatsQuestion=query(collection(db, 'flats'),where('_name_','in',flatIdis));
-                    const flatsNow=await getDocs(flatsQuestion);
-                    const flatsList=flatsNow.docs.map(doc=>({id:doc.id,...doc.data()}));
-                    console.log(flatsList)
+                if (flatIds.length > 0) {
+                    const flatsQuery = query(collection(db, 'flats'), where('_name_', 'in', flatIds));
+                    const flatsSnapshot = await getDocs(flatsQuery);
+                    const flatsList = flatsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     setFavoriteFlats(flatsList);
+                } else {
+                    setFavoriteFlats([]); // Clear the list if there are no favorites
                 }
-            
             } catch (error) {
-                console.error('eroare la preluarea apartamentelor preferate',error);
+                console.error('Error fetching favorite flats:', error);
             }
         };
-        nowFavoriteFlats();
-    },[currentUser]);
 
+        if (currentUser) {
+            fetchFavoriteFlats();
+        }
+    }, [currentUser]);
 
-    const handleDelete =async (flatId) =>{
-        try{
-            favoriteNowRef=doc(db, 'user',currentUser.uid,'favorites',flatId);
-            await deleteDoc(favoriteNowRef);
-            setFavoriteFlats(prevFlats =>prevFlats.filter(flat => flat.id !== flatId));
-            console.log('Favorite deleted');
-    
-   
-  }catch (error) {
-        console.error('Error deleting favorite:', error);
-    }
-}
-return (
-    <div>
+    const handleDelete = async (flatId) => {
+        try {
+            const favoriteDocRef = doc(db, 'users', currentUser.uid, 'favorites', flatId);
+            await deleteDoc(favoriteDocRef);
+
+            // Update local state to remove the deleted flat
+            setFavoriteFlats(prevFlats => prevFlats.filter(flat => flat.id !== flatId));
+        } catch (error) {
+            console.error('Error deleting favorite:', error);
+        }
+    };
+
+    const columns = [
+        { field: 'city', headerName: 'City', width: 150 },
+        { field: 'streetName', headerName: 'Street Name', width: 150 },
+        { field: 'streetNumber', headerName: 'Street Number', width: 150 },
+        { field: 'areaSize', headerName: 'Area Size', width: 100 },
+        { field: 'ac', headerName: 'AC', width: 100 },
+        { field: 'yearBuilt', headerName: 'Year Built', width: 120 },
+        { field: 'rentPrice', headerName: 'Rent Price $', width: 120 },
+        { field: 'dateAvailable', headerName: 'Date Available', width: 150 },
+        { field: 'ownerEmail', headerName: 'Email Owner', width: 150 },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 150,
+            renderCell: (params) => (
+                <>
+                    {/* Allow users to remove from favorites */}
+                    <Button
+                        color="secondary"
+                        onClick={() => handleDelete(params.row.id)}
+                        sx={{ marginLeft: 1 }}
+                    >
+                        Remove from Favorites
+                    </Button>
+                </>
+            ),
+        },
+    ];
+
+    if (!currentUser) return <div>Loading...</div>;  // Prevent rendering if currentUser is undefined
+
+    return (
         <div>
             <Header />
+            <Box>
+                <DataGrid
+                    rows={favoriteFlats}
+                    columns={columns}
+                    pageSize={12}
+                    rowsPerPageOptions={[12]}
+                    disableRowSelectionOnClick
+                    autoHeight
+                    sx={{
+                        marginTop: 15,
+                        "&.MuiDataGrid-root .MuiDataGrid-cell:focus": {
+                            outline: "none",
+                        },
+                        '& .MuiDataGrid-columnHeaders': {
+                            backgroundColor: '#333333',
+                            color: 'rgba(0, 0, 0, 0.9)',
+                            fontSize: '16px',
+                            textTransform: 'uppercase',
+                        },
+                        '& .MuiDataGrid-row': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                            color: '#dcdcdc',
+                            '&:hover': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                color: '#dcdcdc',
+                            },
+                        },
+                        '& .MuiDataGrid-cell': {
+                            borderColor: '#cccccc',
+                        },
+                        '& .MuiDataGrid-cell.Mui-selected': {
+                            backgroundColor: '#555555',
+                            color: 'rgba(0, 0, 0, 0.6)',
+                        },
+                        '& .MuiDataGrid-row.Mui-selected': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                            color: '#ffffff',
+                        },
+                        '.MuiDataGrid-menuIcon': {
+                            visibility: 'visible !important',
+                            width: "auto !important",
+                        }
+                    }}
+                />
+            </Box>
         </div>
-    <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>City</TableCell>
-                        <TableCell>Stret Name</TableCell>
-                        <TableCell>Stret Number</TableCell>
-                        <TableCell>Area Size</TableCell>
-                        <TableCell>AC</TableCell>
-                        <TableCell>Year Built</TableCell>
-                        <TableCell>Rent Price $</TableCell>
-                        <TableCell>Date Available</TableCell>
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {favoriteFlats.map(favoriteFlats => (
-                        <TableRow key={favoriteFlats.id}>
-                            <TableCell>{favoriteFlats.city}</TableCell>
-                            <TableCell>{favoriteFlats.streetName}</TableCell>
-                            <TableCell>{favoriteFlats.streetNumber}</TableCell>
-                            <TableCell>{favoriteFlats.areaSize}</TableCell>
-                            <TableCell>{favoriteFlats.ac}</TableCell>
-                            <TableCell>{favoriteFlats.yearBuilt}</TableCell>
-                            <TableCell>{favoriteFlats.rentPrice}</TableCell>
-                            <TableCell>{favoriteFlats.dateAvailable}</TableCell>
-                            <TableCell>
-                                <Button
-                                    variant="outlined"
-                                    color="secondary"
-                                    onClick={() => handleDelete(favoriteFlats.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-        
-</div>
-
-);
-
+    );
 }
-export default FavoriteFlats;
+
+export default FavoriteFlats;

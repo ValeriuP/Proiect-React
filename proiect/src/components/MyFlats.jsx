@@ -84,7 +84,7 @@ function MyFlats() {
                         <Button
                             color="secondary"
                             onClick={() => handleDelete(params.row.id)}
-                            sx={{ marginLeft: 1 }}
+                            sx={{ marginLeft: 1,color:'#dcdcdc'  }}
                         >
                             Delete
                         </Button>
