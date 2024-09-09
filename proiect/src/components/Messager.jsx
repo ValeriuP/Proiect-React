@@ -182,12 +182,8 @@ function Messages() {
         <div>
            
             <Header />
-            <IconButton color="inherit" style={{ float: 'right' }}>
-                <Badge badgeContent={newMessages} color="error">
-                    <NotificationsIcon />
-                </Badge>
-            </IconButton>
-            <h1>Messages</h1>
+            
+           
 
             <TableContainer>
                 <Table>

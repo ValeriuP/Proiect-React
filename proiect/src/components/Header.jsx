@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../../auth";
 import { Button, Box, Typography } from "@mui/material";
@@ -24,6 +24,8 @@ function Header() {
                 return "All Flats";
             case "/my-profiles":
                 return "My Profile";
+                case "/messages":
+                    return "Messages";
              case "/all-users":
                 return "All Users";
             default:

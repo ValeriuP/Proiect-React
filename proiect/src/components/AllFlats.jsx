@@ -1,18 +1,21 @@
-import {useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { getDoc,doc,setDoc,getDocs,collection,deleteDoc } from "firebase/firestore";
-import {Box,TextField,IconButton} from "@mui/material"
-import {DataGrid} from "@mui/x-data-grid";
-import {Favorite,Send,FavoriteBorder} from '@mui/icons-material' 
+import { getDoc, doc, setDoc, getDocs, collection, deleteDoc } from "firebase/firestore";
+import { Box, TextField, IconButton, Modal, Button, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { Favorite, Send, FavoriteBorder } from '@mui/icons-material';
 import Header from "./Header";
-import { Link} from "react-router-dom";
-import {Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import SendIcon from '@mui/icons-material/Send';
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);
     const [filteredFlats, setFilteredFlats] = useState([]);
     const [favoriteFlats, setFavoriteFlats] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedFlatId, setSelectedFlatId] = useState(null);
+    const [message, setMessage] = useState("");
     const { currentUser } = useAuth();
 
     useEffect(() => {
@@ -34,6 +37,7 @@ function AllFlats() {
         fetchFlats();
         fetchFavorites();
     }, [currentUser]);
+
     const handleFavorite = async (flatId) => {
         try {
             const userFavoritesRef = doc(db, 'users', currentUser.uid, 'favorites', flatId);
@@ -64,8 +68,38 @@ function AllFlats() {
         setFilteredFlats(results);
     };
 
+    // Open modal to send a message
+    const handleOpenModal = (flatId) => {
+        setSelectedFlatId(flatId);
+        setOpenModal(true);
+    };
+
+    // Close the modal
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setMessage("");  // Clear the message input field
+    };
+
+    // Send message and store in Firebase
+    const handleSendMessage = async () => {
+        if (!message.trim()) return;
+
+        try {
+            const messageRef = doc(db, 'flats', selectedFlatId, 'messages', currentUser.uid);
+            await setDoc(messageRef, {
+                message,
+                senderId: currentUser.uid,
+                timestamp: new Date(),
+            });
+            console.log('Message sent');
+            handleCloseModal();
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    };
+
     const columns = [
-        { field: 'city', headerName: 'City', width: 150,},
+        { field: 'city', headerName: 'City', width: 150 },
         { field: 'streetName', headerName: 'Street Name', width: 150 },
         { field: 'streetNumber', headerName: 'Street Number', width: 150 },
         { field: 'areaSize', headerName: 'Area Size', width: 100 },
@@ -80,19 +114,17 @@ function AllFlats() {
             width: 150,
             renderCell: (params) => (
                 <>
-                  <IconButton onClick={() => handleFavorite(params.row.id)}>
-    {favoriteFlats.includes(params.row.id) ? (
-        <Favorite sx={{ color: '#ff0000',  }} />  
-    ) : (
-        <FavoriteBorder sx={{ color: '#dcdcdc' }} />  
-    )}
-</IconButton>
-<IconButton
-    onClick={() => window.location.href = `mailto:${params.row.ownerEmail}`}
->
-    <Send sx={{ color: '#dcdcdc' }} /> 
-</IconButton>
-
+                    <IconButton onClick={() => handleFavorite(params.row.id)}>
+                        {favoriteFlats.includes(params.row.id) ? (
+                            <Favorite sx={{ color: '#ff0000' }} />
+                        ) : (
+                            <FavoriteBorder sx={{ color: '#dcdcdc' }} />
+                        )}
+                    </IconButton>
+                    {/* Open the modal when clicking the send icon */}
+                    <IconButton onClick={() => handleOpenModal(params.row.id)}>
+                        <SendIcon sx={{color:'#dcdcdc'}} />
+                    </IconButton>
                 </>
             ),
         },
@@ -101,106 +133,128 @@ function AllFlats() {
     return (
         <div>
             <Header />
-            
-        <Box 
-       
-        >
-           <TextField
-    variant="outlined"
-    placeholder="Search..."
-    onChange={handleSearch}
-    sx={{ 
-        marginBottom: 3, 
-        marginTop: 4, 
-        width: '200px', 
-        borderRadius: 2, 
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-        color: '#dcdcdc',
-        '& .MuiOutlinedInput-root': {
-            '&::placeholder': {
-                color: '#dcdcdc', // Customize placeholder color
-                opacity: 1, // Ensures opacity is set for color to take effect
-         
-            },
-         
-        },
-        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'transparent', // Transparent border on focus
-        },
-    }}
-    InputProps={{
-        style: {
-            color: '#dcdcdc', // Customize text color
-        },
-    }}
-/>
+            <Box>
+                <TextField
+                    variant="outlined"
+                    placeholder="Search..."
+                    onChange={handleSearch}
+                    sx={{
+                        marginBottom: 3,
+                        marginTop: 4,
+                        width: '200px',
+                        borderRadius: 2,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        color: '#dcdcdc',
+                        '& .MuiOutlinedInput-root': {
+                            '&::placeholder': {
+                                color: '#dcdcdc',
+                                opacity: 1,
+                            },
+                        },
+                        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: 'transparent',
+                        },
+                    }}
+                    InputProps={{
+                        style: {
+                            color: '#dcdcdc',
+                        },
+                    }}
+                />
 
+                <DataGrid
+                    rows={filteredFlats}
+                    columns={columns}
+                    pageSize={12}
+                    rowsPerPageOptions={[12]}
+                    disableRowSelectionOnClick
+                    autoHeight
+                    sx={{
+                        "&.MuiDataGrid-root .MuiDataGrid-cell:focus": {
+                            outline: "none",
+                        },
+                        '& .MuiDataGrid-columnHeaders': {
+                            backgroundColor: '#333333',
+                            color: 'rgba(0, 0, 0, 0.9)',
+                            fontSize: '16px',
+                            textTransform: 'uppercase',
+                        },
+                        '& .MuiDataGrid-row': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                            color: '#dcdcdc',
+                            '&:hover': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                color: '#dcdcdc',
+                            },
+                        },
+                        '& .MuiDataGrid-cell': {
+                            borderColor: '#cccccc',
+                        },
+                    }}
+                />
+            </Box>
 
-<DataGrid 
-    rows={filteredFlats}
-    columns={columns}
-    pageSize={12}
-    rowsPerPageOptions={[12]}
-    disableRowSelectionOnClick
-    autoHeight
-    sx={{ "&.MuiDataGrid-root .MuiDataGrid-cell:focus": {
-          outline: "none",
-        },
-        '& .MuiDataGrid-columnHeaders': {
-            backgroundColor: '#333333',  // Header background color
-            color: 'rgba(0, 0, 0, 0.9)',  // Header text color
-            fontSize: '16px', 
-            textTransform: 'uppercase',   // Header font size
-        },
-        '& .MuiDataGrid-row': {
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',  // Row background color
-            color: '#dcdcdc',                       // Row text color
-            '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',         // Row hover background color
-                color: '#dcdcdc',        // Row hover text color
-            },
-        },
-        '& .MuiDataGrid-cell': {
-            borderColor: '#cccccc',                 // Cell border color
-        },
-        '& .MuiDataGrid-cell.Mui-selected': {
-            backgroundColor: '#555555',             // Selected cell background color
-            color: 'rgba(0, 0, 0, 0.6)',                       // Selected cell text color
-        },
-        '& .MuiDataGrid-row.Mui-selected': {
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',             // Selected row background color
-            color: '#ffffff',                       // Selected row text color
-        },
-       
-            '.MuiDataGrid-menuIcon': {
-                visibility: 'visible !important',
-                width: "auto !important",
-            }
-    }}
-/>
+            {/* Modal for sending a message */}
+            <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    <Typography id="modal-title" variant="h6" component="h2">
+                        Send Message to Owner
+                    </Typography>
+                    <TextField
+                        fullWidth
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        label="Your message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        sx={{ mt: 2, mb: 2 }}
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSendMessage}
+                        endIcon={<Send />}
+                    >
+                        Send
+                    </Button>
+                </Box>
+            </Modal>
 
-        </Box>
-        <div  style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-    sx={{
-        color: 'rgba(0, 0, 0, 0.9)',
-        fontSize: '20px',
-        width: 100,
-        backgroundColor: '#dcdcdc',
-        marginTop: 5,
-        '&:hover': {
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            color: '#dcdcdc'
-        }
-    }}
-    component={Link}
-    to="/"
->
-    Back
-</Button>
-</div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button
+                    sx={{
+                        color: 'rgba(0, 0, 0, 0.9)',
+                        fontSize: '20px',
+                        width: 100,
+                        backgroundColor: '#dcdcdc',
+                        marginTop: 5,
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            color: '#dcdcdc'
+                        }
+                    }}
+                    component={Link}
+                    to="/"
+                >
+                    Back
+                </Button>
+            </div>
         </div>
-        
     );
 }
 
