@@ -18,11 +18,12 @@ function FavoriteFlats() {
                 const favoritesCollection = collection(db, 'users', currentUser.uid, 'favorites');
                 const favoritesSnapshot = await getDocs(favoritesCollection);
                 const flatIds = favoritesSnapshot.docs.map(doc => doc.data().flatId);
-
+             console.log(flatIds);
                 if (flatIds.length > 0) {
-                    const flatsQuery = query(collection(db, 'flats'), where('_name_', 'in', flatIds));
+                    const flatsQuery = query(collection(db, 'flats'), where('__name__', 'in', flatIds));
                     const flatsSnapshot = await getDocs(flatsQuery);
                     const flatsList = flatsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    console.log(flatsList);
                     setFavoriteFlats(flatsList);
                 } else {
                     setFavoriteFlats([]); // Clear the list if there are no favorites
