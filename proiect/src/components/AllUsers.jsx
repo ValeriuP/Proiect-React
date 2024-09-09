@@ -3,7 +3,7 @@ import { db } from "../../firebase";
 import { getDocs,deleteDoc,doc,collection } from "firebase/firestore";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box,Button,DialogTitle,DialogContent,DialogContentText,Dialog,DialogActions,IconButton } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Delete, Repeat } from "@mui/icons-material";
 import Header from "./Header";
 import { Link,useLocation,useNavigate } from "react-router-dom";
 
@@ -68,16 +68,50 @@ function AllUsers() {
     ];
 
     return (
-        <div>
+        <div sx={{backgroundImage:'url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg")',backgroundRepeat:'repeat'}} >
             <Header />
 
-            <Box sx={{ height: 400, width: '100%', marginTop: 2 }}>
+            <Box >
                 <DataGrid
+               sx={{marginTop: 15, "&.MuiDataGrid-root .MuiDataGrid-cell:focus": {
+                outline: "none",
+              },
+              '& .MuiDataGrid-columnHeaders': {
+                  backgroundColor: '#333333',  // Header background color
+                  color: 'rgba(0, 0, 0, 0.9)',  // Header text color
+                  fontSize: '16px', 
+                  textTransform: 'uppercase',   // Header font size
+              },
+              '& .MuiDataGrid-row': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',  // Row background color
+                  color: '#dcdcdc',                       // Row text color
+                  '&:hover': {
+                      backgroundColor: 'rgba(0, 0, 0, 0.6)',         // Row hover background color
+                      color: '#dcdcdc',        // Row hover text color
+                  },
+              },
+              '& .MuiDataGrid-cell': {
+                  borderColor: '#cccccc',                 // Cell border color
+              },
+              '& .MuiDataGrid-cell.Mui-selected': {
+                  backgroundColor: '#555555',             // Selected cell background color
+                  color: 'rgba(0, 0, 0, 0.6)',                       // Selected cell text color
+              },
+              '& .MuiDataGrid-row.Mui-selected': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',             // Selected row background color
+                  color: '#ffffff',                       // Selected row text color
+              },
+      
+                  '.MuiDataGrid-menuIcon': {
+                      visibility: 'visible !important',
+                      width: "auto !important",
+                  }
+          }}
                     rows={users}
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
-                    disableSelectionOnClick
+                    disableRowSelectionOnClick
                     autoHeight
                     sortModel={[
                         {

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { Button, Box } from "@mui/material";
+import { Button,Box } from "@mui/material";
 import { doc, deleteDoc, getDocs, collection, query, where } from "firebase/firestore";
 import Header from "./Header";
 import { DataGrid } from "@mui/x-data-grid";
 import { Favorite } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 function FavoriteFlats() {
     const [favoriteFlats, setFavoriteFlats] = useState([]);
@@ -127,6 +128,21 @@ function FavoriteFlats() {
                     }}
                 />
             </Box>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button
+                    sx={{
+                        color: 'rgba(0, 0, 0, 0.9)',
+                        fontSize: '20px',
+                        width: 100,
+                        backgroundColor: '#dcdcdc',
+                        marginTop: 5,
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            color: '#dcdcdc'
+                        }
+                    }}
+                    color="inherit" component={Link} to="/">Back</Button>
+            </div>
         </div>
     );
 }
