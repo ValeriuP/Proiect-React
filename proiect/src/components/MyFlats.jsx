@@ -14,17 +14,14 @@ function MyFlats() {
     const [flats, setFlats] = useState([]);
     const [favoriteFlats, setFavoriteFlats] = useState([]);
 
-    // Fetch flats from Firestore and also get the favorite flats for the current user
     useEffect(() => {
         const fetchFlatsAndFavorites = async () => {
-            // Fetch all flats owned by the current user
             const flatsCollection = collection(db, 'flats');
             const flatsQuery = query(flatsCollection, where('ownerUid', '==', currentUser.uid));
             const flatsSnapshot = await getDocs(flatsQuery);
             const flatsList = flatsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setFlats(flatsList);
 
-            // Fetch favorite flats from the 'favorites' collection for the current user
             const favoritesCollection = collection(db, 'favorites');
             const favoritesQuery = query(favoritesCollection, where('userId', '==', currentUser.uid));
             const favoritesSnapshot = await getDocs(favoritesQuery);
@@ -37,19 +34,25 @@ function MyFlats() {
         }
     }, [currentUser]);
 
-    // Handle favorite toggle and save/remove it from Firestore
     const handleFavorite = async (flatId) => {
         const favoritesCollection = collection(db, 'favorites');
         const favoriteDocRef = doc(favoritesCollection, `${currentUser.uid}_${flatId}`);
 
         if (favoriteFlats.includes(flatId)) {
-            // Remove the flat from favorites in Firestore
             await deleteDoc(favoriteDocRef);
             setFavoriteFlats(prevFavorites => prevFavorites.filter(id => id !== flatId));
         } else {
-            // Add the flat to favorites in Firestore
             await setDoc(favoriteDocRef, { userId: currentUser.uid, flatId });
             setFavoriteFlats(prevFavorites => [...prevFavorites, flatId]);
+        }
+    };
+
+    const handleDelete = async (flatId) => {
+        try {
+            await deleteDoc(doc(db, 'flats', flatId));
+            setFlats(prevFlats => prevFlats.filter(flat => flat.id !== flatId));
+        } catch (error) {
+            console.error("Error deleting flat: ", error);
         }
     };
 
@@ -68,13 +71,25 @@ function MyFlats() {
             headerName: 'Actions',
             width: 150,
             renderCell: (params) => (
-                <IconButton onClick={() => handleFavorite(params.row.id)}>
-                    {favoriteFlats.includes(params.row.id) ? (
-                        <Favorite sx={{ color: '#ff0000' }} />  // Change to red when favorited
-                    ) : (
-                        <FavoriteBorder sx={{ color: '#dcdcdc' }} />  // Default color when not favorited
+                <>
+                    <IconButton onClick={() => handleFavorite(params.row.id)}>
+                        {favoriteFlats.includes(params.row.id) ? (
+                            <Favorite sx={{ color: '#ff0000' }} />
+                        ) : (
+                            <FavoriteBorder sx={{ color: '#dcdcdc' }} />
+                        )}
+                    </IconButton>
+
+                    {currentUser.uid === params.row.ownerUid && (
+                        <Button
+                            color="secondary"
+                            onClick={() => handleDelete(params.row.id)}
+                            sx={{ marginLeft: 1 }}
+                        >
+                            Delete
+                        </Button>
                     )}
-                </IconButton>
+                </>
             ),
         },
     ];
