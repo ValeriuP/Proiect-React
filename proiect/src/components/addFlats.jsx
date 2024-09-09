@@ -155,8 +155,14 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                                     aria-label="Toggle Button"
                                     sx={{ width: '100%' }}
                                 >
-                                    <ToggleButton value="yes" sx={{ height: '30px' }}>Has AC</ToggleButton>
-                                    <ToggleButton value="no" sx={{ height: '30px' }}>No AC</ToggleButton>
+                                    <ToggleButton value="yes" sx={{ height: '30px',color: '#dcdcdc','&:hover':{
+                                        backgroundColor:'#dcdcdc', color:'rgba(0, 0, 0, 0.9)'},'&:focus': {
+      outline: 'none', // Remove focus outline
+    }, }}>Has AC</ToggleButton>
+                                    <ToggleButton value="no" sx={{ height: '30px',color: '#dcdcdc','&:hover':{
+                                        backgroundColor:'#dcdcdc', color:'rgba(0, 0, 0, 0.9)'},'&:focus': {
+      outline: 'none', // Remove focus outline
+    } }}>No AC</ToggleButton>
                                 </ToggleButtonGroup>
                                 {isSubmitted && errors.ac && <div style={{ color: 'red', fontSize: '12px' }}>{errors.ac}</div>}
                             </TableCell>
