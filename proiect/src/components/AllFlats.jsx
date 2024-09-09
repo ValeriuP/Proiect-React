@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { getDoc, doc, setDoc, getDocs, collection, deleteDoc } from "firebase/firestore";
+import { getDoc, doc, setDoc, getDocs, collection, deleteDoc, query, documentId,where, addDoc } from "firebase/firestore";
 import { Box, TextField, IconButton, Modal, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Favorite, Send, FavoriteBorder } from '@mui/icons-material';
@@ -70,6 +70,7 @@ function AllFlats() {
 
     // Open modal to send a message
     const handleOpenModal = (flatId) => {
+        console.log(flatId)
         setSelectedFlatId(flatId);
         setOpenModal(true);
     };
@@ -84,18 +85,25 @@ function AllFlats() {
     const handleSendMessage = async () => {
         if (!message.trim()) return;
 
-        try {
-            const messageRef = doc(db, 'flats', selectedFlatId, 'messages', currentUser.uid);
-            await setDoc(messageRef, {
-                message,
-                senderId: currentUser.uid,
-                timestamp: new Date(),
-            });
-            console.log('Message sent');
-            handleCloseModal();
-        } catch (error) {
-            console.error('Error sending message:', error);
-        }
+
+     const apRef =collection(db,'flats');
+    
+        let doc = await  getDocs(apRef);
+        
+        let data = doc.docs.map(d=>({...d.data(),id:d.id}))
+        let mess_data = data.filter(d=>d.id==selectedFlatId)
+        console.log(mess_data)
+        let owner_id=mess_data[0].ownerUid;
+
+        const messageRef=collection(db,'messages');
+        await addDoc(messageRef,{
+            message:message,
+            senderId:currentUser.uid,
+            receiverId:owner_id,
+            
+        })
+        handleCloseModal();
+ 
     };
 
     const columns = [
