@@ -70,11 +70,11 @@ function Header() {
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                             color="inherit" component={Link} to="/messages">Messages</Button>
-                    <Button sx={{
+                    {/* <Button sx={{
                                 color:' #dcdcdc','&:hover':{
                     backgroundColor:'black', color:'#dcdcdc'}
                             }}
-                              color="inherit" component={Link} to="/all-users">All Users</Button>        
+                              color="inherit" component={Link} to="/all-users">All Users</Button>         */}
                    
                 
                 <Box>

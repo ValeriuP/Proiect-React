@@ -12,6 +12,8 @@ import MyProfiles from './components/MyProfiles.jsx';
 import UsersProfiles from './components/UsersProfiles.jsx';
 import MyFlats from './components/MyFlats.jsx';
 import FavoriteFlats from './components/FavoriteFlats.jsx';
+import AllUsers from './components/AllUsers.jsx';
+import Messages from './components/Messager.jsx';
 
 const router = createBrowserRouter([{
   path:'/',
@@ -54,7 +56,15 @@ const router = createBrowserRouter([{
  {
  path:'/all-flats',
  element:<AllFlats />
- }
+ },
+ {
+  path:'/all-users',
+  element:<AllUsers />
+ },
+ {
+  path:'/messages',
+  element:<Messages />
+ },
 
 
 ])

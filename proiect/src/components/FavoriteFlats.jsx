@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
 import { Button,Table,TableBody,TableContainer,TableRow,TableCell,Paper }  from "@mui/material";
@@ -7,7 +7,7 @@ import {TableHead} from "@mui/material";
 import Header from "./Header";
 
 function FavoriteFlats(){
-    const {currentUser,userLoggedIn,loading}=useAuth();
+    const {currentUser}=useAuth();
     const [favoriteFlats,setFavoriteFlats]=useState([]);
 
     useEffect(()=>{
@@ -16,7 +16,7 @@ function FavoriteFlats(){
                 console.log(currentUser);
                 console.log(loading)
                 if(!loading)
-                {
+                
                     console.log("test")
                 const favoriteColection=collection(db,'users',currentUser.uid,'favorites');
                 const favoriteNow=await getDocs(favoriteColection);
@@ -30,13 +30,13 @@ function FavoriteFlats(){
                     console.log(flatsList)
                     setFavoriteFlats(flatsList);
                 }
-            }
+            
             } catch (error) {
                 console.error('eroare la preluarea apartamentelor preferate',error);
             }
         };
         nowFavoriteFlats();
-    },[loading]);
+    },[currentUser]);
 
 
     const handleDelete =async (flatId) =>{

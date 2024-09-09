@@ -56,7 +56,7 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsSubmitted(true);  // Setăm că formularul a fost trimis
+        setIsSubmitted(true);  
         if (validate()) {
             setIsFormValid(true);
             try {
@@ -221,8 +221,8 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                                     marginTop: 1, backgroundColor:'#dcdcdc',marginInline:2,  color:'rgba(0, 0, 0, 0.9)', '&:hover':{
                                         backgroundColor:'rgba(0, 0, 0, 0.9)', color:'#dcdcdc'}
                                 }}
-                                component={Link}
-    to="/"
+                                // component={Link}
+                                //      to="/"
                             >
                              Cancel
                             </Button>
