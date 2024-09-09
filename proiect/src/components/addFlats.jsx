@@ -147,6 +147,22 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                     </TableRow>
 
                     <TableRow sx={{ height: '40px' }}>
+                            <TableCell sx={{ padding: '10px 8px' }}>
+                                <ToggleButtonGroup
+                                    value={flatData.ac}
+                                    exclusive
+                                    onChange={handleACChange}
+                                    aria-label="Toggle Button"
+                                    sx={{ width: '100%' }}
+                                >
+                                    <ToggleButton value="yes" sx={{ height: '30px' }}>Has AC</ToggleButton>
+                                    <ToggleButton value="no" sx={{ height: '30px' }}>No AC</ToggleButton>
+                                </ToggleButtonGroup>
+                                {isSubmitted && errors.ac && <div style={{ color: 'red', fontSize: '12px' }}>{errors.ac}</div>}
+                            </TableCell>
+                        </TableRow>
+
+                    <TableRow sx={{ height: '40px' }}>
                         <TableCell sx={{ padding: '10px 8px' }}>
                             <TextField
                                 name="yearBuilt"
@@ -221,8 +237,8 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                                     marginTop: 1, backgroundColor:'#dcdcdc',marginInline:2,  color:'rgba(0, 0, 0, 0.9)', '&:hover':{
                                         backgroundColor:'rgba(0, 0, 0, 0.9)', color:'#dcdcdc'}
                                 }}
-                                // component={Link}
-                                //      to="/"
+                                component={Link}
+                                     to="/"
                             >
                              Cancel
                             </Button>
