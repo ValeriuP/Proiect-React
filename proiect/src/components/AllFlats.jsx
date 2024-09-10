@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
 import { getDoc, doc, setDoc, getDocs, collection, deleteDoc, query, documentId,where, addDoc } from "firebase/firestore";
@@ -124,9 +124,9 @@ function AllFlats() {
                 <>
                     <IconButton onClick={() => handleFavorite(params.row.id)}>
                         {favoriteFlats.includes(params.row.id) ? (
-                            <Favorite sx={{ color: '#ff0000' }} />
+                            <Favorite sx={{ color: '#9e1b32' }} />
                         ) : (
-                            <FavoriteBorder sx={{ color: '#dcdcdc' }} />
+                            <FavoriteBorder sx={{ color: '#9e1b32' }} />
                         )}
                     </IconButton>
                     {/* Open the modal when clicking the send icon */}

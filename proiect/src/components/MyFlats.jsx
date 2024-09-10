@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { getDocs, collection, query, where, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { getDocs, collection, query, where, doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
@@ -15,35 +15,43 @@ function MyFlats() {
     const [favoriteFlats, setFavoriteFlats] = useState([]);
 
     useEffect(() => {
-        const fetchFlatsAndFavorites = async () => {
+        const fetchFlat = async () => {
             const flatsCollection = collection(db, 'flats');
             const flatsQuery = query(flatsCollection, where('ownerUid', '==', currentUser.uid));
             const flatsSnapshot = await getDocs(flatsQuery);
             const flatsList = flatsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setFlats(flatsList);
 
-            const favoritesCollection = collection(db, 'favorites');
-            const favoritesQuery = query(favoritesCollection, where('userId', '==', currentUser.uid));
-            const favoritesSnapshot = await getDocs(favoritesQuery);
-            const favoriteIds = favoritesSnapshot.docs.map(doc => doc.data().flatId);
-            setFavoriteFlats(favoriteIds);
+        };
+        const fetchFavorites = async () => {
+            const favoritesCollection = collection(db, 'users', currentUser.uid, 'favorites');
+            const flatsNow = await getDocs(favoritesCollection);
+            const favoritesList = flatsNow.docs.map(doc => doc.id);
+            setFavoriteFlats(favoritesList);
         };
 
         if (currentUser) {
-            fetchFlatsAndFavorites();
+            fetchFlat();
+            fetchFavorites();
         }
     }, [currentUser]);
 
     const handleFavorite = async (flatId) => {
-        const favoritesCollection = collection(db, 'favorites');
-        const favoriteDocRef = doc(favoritesCollection, `${currentUser.uid}_${flatId}`);
+        try {
+            const userFavoritesRef = doc(db, 'users', currentUser.uid, 'favorites', flatId);
+            const favoriteDoc = await getDoc(userFavoritesRef);
 
-        if (favoriteFlats.includes(flatId)) {
-            await deleteDoc(favoriteDocRef);
-            setFavoriteFlats(prevFavorites => prevFavorites.filter(id => id !== flatId));
-        } else {
-            await setDoc(favoriteDocRef, { userId: currentUser.uid, flatId });
-            setFavoriteFlats(prevFavorites => [...prevFavorites, flatId]);
+            if (favoriteDoc.exists()) {
+                await deleteDoc(userFavoritesRef);
+                setFavoriteFlats(prev => prev.filter(id => id !== flatId));
+                console.log('Removed from favorites');
+            } else {
+                await setDoc(userFavoritesRef, { flatId });
+                setFavoriteFlats(prev => [...prev, flatId]);
+                console.log('Added to favorites');
+            }
+        } catch (error) {
+            console.error('Error toggling favorite:', error);
         }
     };
 
@@ -71,12 +79,13 @@ function MyFlats() {
             headerName: 'Actions',
             width: 150,
             renderCell: (params) => (
+               
                 <>
                     <IconButton onClick={() => handleFavorite(params.row.id)}>
                         {favoriteFlats.includes(params.row.id) ? (
-                            <Favorite sx={{ color: '#ff0000' }} />
+                            <Favorite sx={{ color: '#9e1b32' }} />
                         ) : (
-                            <FavoriteBorder sx={{ color: '#dcdcdc' }} />
+                            <FavoriteBorder sx={{ color: '#9e1b32' }} />
                         )}
                     </IconButton>
 
@@ -84,7 +93,7 @@ function MyFlats() {
                         <Button
                             color="secondary"
                             onClick={() => handleDelete(params.row.id)}
-                            sx={{ marginLeft: 1,color:'#dcdcdc'  }}
+                            sx={{ marginLeft: 1,color:'#9e1b32'  }}
                         >
                             Delete
                         </Button>

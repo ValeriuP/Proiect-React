@@ -11,8 +11,7 @@ function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const { currentUser, userLoggedIn } = useAuth();
-    const isLoginPage = location.pathname === '/login';
-    const isRegisterPage = location.pathname === '/register';
+    const { isAdmin } = useAuth(); // Get isAdmin from the Auth context
 
     useEffect(() => { console.log(location) }, []);
 
@@ -72,18 +71,38 @@ function Header() {
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                             color="inherit" component={Link} to="/messages">Messages</Button>
-                    <Button sx={{
+                    {/* <Button sx={{
                                 color:' #dcdcdc','&:hover':{
                     backgroundColor:'black', color:'#dcdcdc'}
                             }}
-                              color="inherit" component={Link} to="/all-users">All Users</Button>        
-                   
-                
+                              color="inherit" component={Link} to="/all-users">All Users</Button>         */}
+                 {isAdmin && (
+    <Link to="/all-users">
+        <Button
+            sx={{
+                color: '#dcdcdc',
+                '&:hover': {
+                    backgroundColor: 'black',
+                    color: '#dcdcdc'
+                },
+                '&.Mui-focusVisible': {
+                    border: 'none' // Remove any border when focused
+                },
+                '&:focus': {
+                    outline: 'none', // Remove default focus outline
+                    border: 'none'   // Ensure no border on focus
+                }
+            }}
+        >
+            All Users
+        </Button>
+    </Link>
+)}
                 <Box>
                     {userLoggedIn ? (
                         <>
                             <Button sx={{
-                                color:'#dcdcdc','&:hover':{
+                                backgroundColor:'#9e1b32',color:'#dcdcdc','&:hover':{
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                                 onClick={() => {

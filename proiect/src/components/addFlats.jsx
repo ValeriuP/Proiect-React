@@ -37,7 +37,7 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
         temporarErrors.yearBuilt = flatData.yearBuilt && !isNaN(flatData.yearBuilt) ? "" : "Year Built is required and must be a number.";
         temporarErrors.rentPrice = flatData.rentPrice && !isNaN(flatData.rentPrice) ? "" : "Rent Price is required and must be a number.";
         temporarErrors.dateAvailable = flatData.dateAvailable ? "" : "Date Available is required.";
-        temporarErrors.ownerEmail = flatData.ownerEmail ? "" : "Email is required.";
+        
        
         setErrors(temporarErrors);
         return Object.values(temporarErrors).every(x=>x ==="");
@@ -57,14 +57,26 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitted(true);  
+    
+        // Log flatData for debugging
+        console.log("Flat data before validation:", flatData);
+    
         if (validate()) {
             setIsFormValid(true);
             try {
                 if (currentUser) {
-                    const flatData1 = { ...flatData, ownerUid: currentUser.uid }
-
+                    const flatData1 = { 
+                        ...flatData, 
+                        ownerUid: currentUser.uid, // Save the user's UID
+                        ownerEmail: currentUser.email // Automatically add the current user's email
+                    };
+    
+                    console.log("Flat data after adding user info:", flatData1);
+    
                     const flatsCollection = collection(db, 'flats');
                     await addDoc(flatsCollection, flatData1);
+    
+                    console.log("Flat successfully added to Firestore!");
                 }
                 navigate('/all-flats');
             } catch (error) {
@@ -72,9 +84,11 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
             }
         } else {
             setIsFormValid(false);
+            console.log("Validation failed:", errors);
         }
     };
-
+    
+    
     return (
         
     <Container sx={{ maxWidth: '100%', paddingTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'start', minHeight: '100vh' }}>
@@ -247,20 +261,7 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                         </TableCell>
                     </TableRow>
 
-                    <TableRow sx={{ height: '40px' }}>
-                        <TableCell sx={{ padding: '10px 8px' }}>
-                            <TextField
-                                name="ownerEmail"
-                                label="Email Owner"
-                                onChange={handleChange}
-                                sx={{ width: '100%', margin: 0 }}
-                                InputProps={{ sx: { height: '40px', color: '#dcdcdc' } }}
-                                InputLabelProps={{ sx: { color: '#dcdcdc' } }}
-                                error={isSubmitted && !!errors.ownerEmail}
-                                helperText={isSubmitted && errors.ownerEmail}
-                            />
-                        </TableCell>
-                    </TableRow>
+                   
 
                     <TableRow>
                         <TableCell align="center" sx={{ padding: '4px 8px', color: 'white' }}>
@@ -282,7 +283,7 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
                             <Button
                                 onClick={handleSubmit}
                                 sx={{
-                                    backgroundColor: 'green',
+                                  
                                     color: 'white',
                                     width: '100px',
                                     height: '30px',
