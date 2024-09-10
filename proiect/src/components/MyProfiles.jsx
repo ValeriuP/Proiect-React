@@ -8,7 +8,7 @@ import { Button, Box, CardContent, Dialog, DialogActions, DialogContent, DialogT
 import './MyProfile.css';
 
 const MyProfiles = () => {
-    const { currentUser, isAdmin } = useAuth();
+    const { currentUser} = useAuth();
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({
         firstName: '',
@@ -126,13 +126,13 @@ const MyProfiles = () => {
                                             Edit
                                         </Button>
                                     </Grid>
-                                    {isAdmin && (
+                                    
                                         <Grid item xs={5} sm={5}>
                                             <Button color="secondary" onClick={handleDelete} sx={{ backgroundColor: '#9e1b32', color: '#dcdcdc', '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.9)', color: '#dcdcdc' },  marginLeft: 7}}>
                                                 Delete Account
                                             </Button>
                                         </Grid>
-                                    )}
+                                 
                                 </Grid>
                             </CardContent>
                         </Card>
