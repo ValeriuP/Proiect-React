@@ -17,7 +17,7 @@ function FavoriteFlats() {
                 const favoritesCollection = collection(db, 'users', currentUser.uid, 'favorites');
                 const favoritesSnapshot = await getDocs(favoritesCollection);
                 const flatIds = favoritesSnapshot.docs.map(doc => doc.data().flatId);
-             console.log(flatIds);
+             
                 if (flatIds.length > 0) {
                     const flatsQuery = query(collection(db, 'flats'), where('__name__', 'in', flatIds));
                     const flatsSnapshot = await getDocs(flatsQuery);

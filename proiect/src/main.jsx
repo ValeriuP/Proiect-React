@@ -9,7 +9,6 @@ import Home from './components/Home.jsx';
 import AddFlat from './components/addFlats.jsx';
 import AllFlats from './components/AllFlats.jsx';
 import MyProfiles from './components/MyProfiles.jsx';
-import UsersProfiles from './components/UsersProfiles.jsx';
 import MyFlats from './components/MyFlats.jsx';
 import FavoriteFlats from './components/FavoriteFlats.jsx';
 import AllUsers from './components/AllUsers.jsx';
@@ -45,10 +44,7 @@ const router = createBrowserRouter([{
    path:'/my-profiles',
    element:<MyProfiles />
  },
- {
-  path:'/users-profiles',
-  element:<UsersProfiles />
- },
+
  {
   path:'/favorite-flats',
   element:<FavoriteFlats />
