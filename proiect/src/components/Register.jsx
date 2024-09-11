@@ -7,6 +7,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import './Register.css';
 
+
 function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -85,7 +86,9 @@ function Register() {
     }, [currentUser, navigate]);
 
     return (
+        
         <div className="registration__container">
+  
             <Box
                 sx={{
                     display: 'flex',
@@ -95,6 +98,7 @@ function Register() {
                     height: '80vh',
                 }}
             >
+          
                 <Typography variant="h4" sx={{ marginBottom: 4, color: '#aaaaa2' }}>
                     Sign Up
                 </Typography>
