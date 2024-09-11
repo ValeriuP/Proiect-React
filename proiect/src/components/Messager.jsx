@@ -62,7 +62,7 @@ function Messages(){
                     <TableRow >
                         <TableCell sx={{color:'#dcdcdc'}}>Sender</TableCell>
                         <TableCell sx={{color:'#dcdcdc'}}>Message</TableCell>
-                        <TableCell sx={{color:'#dcdcdc'}}></TableCell>
+                       
                     </TableRow>
                 </TableHead>
                 <TableBody>
