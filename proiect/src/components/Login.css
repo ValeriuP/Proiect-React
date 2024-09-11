@@ -16,3 +16,30 @@
         color: #aaaaa2;
         text-decoration-line: underline;
     }
+
+    @media (max-width: 769px) {
+        body {
+            background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg"); /* Optional: Different image for tablets */
+            background-size: cover;
+            background-position: center;
+        }
+       
+    }
+    
+    @media (max-width: 480px) {
+        body {
+            background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg"); /* Optional: Different image for tablets */
+            background-size: cover;
+            background-position: center;
+        }
+        .login__container {
+            width: 100%;
+           
+            padding: 10px;
+          margin-top: 45%;
+        }
+    
+        .link-style {
+            font-size: 0.875rem; /* Adjust font size for smaller screens */
+        }
+    }

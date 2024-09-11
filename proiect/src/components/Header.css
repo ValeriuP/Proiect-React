@@ -36,3 +36,56 @@
     align-items: center;
     
 }
+.burger-menu {
+    display: none; /* Hidden on larger screens */
+}
+@media (max-width: 768px) {
+    /* Container remains in a row */
+    body{
+       
+            background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg"); /* Optional: Different image for tablets */
+            background-size: cover;
+            background-position: center;
+        
+    }
+    .navbar__container {
+        flex-direction: row; /* Keep items in one row */
+        justify-content: space-between; /* Space out the items */
+        align-items: center; /* Vertically center the items */
+        
+        width: 750px; /* Full width */
+        height: 70px; /* Adjust height based on content */
+        padding: 0;
+        margin: 0;
+   
+    }
+
+
+    /* Adjust logo size */
+    .logo__name {
+        font-size: 18px; /* Make the logo smaller */
+    }
+
+    /* Center the hello text */
+    .hello {
+        text-align: center; 
+        margin-left: 0;
+    }
+
+    /* Display navigation menu horizontally */
+    .components__pagename {
+        display: flex; /* Keep menu in a row */
+        gap: 10px; /* Reduce gap between buttons */
+    }
+
+    /* Burger menu is hidden for larger screens but shown on smaller ones */
+    .burger-menu {
+       display: none; /* Burger menu hidden since everything is in one line */
+    }
+
+    /* Ensure the right side aligns properly */
+    .container__right__side {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/authContext";
 import { Button,Toolbar } from "@mui/material";
 import { db } from "../../firebase";
 import { collection,getDoc,getDocs,doc } from "firebase/firestore";
-import AllFlats from "./AllFlats";
 import './Home.css'
 import Header from "./Header";
 
@@ -60,14 +59,14 @@ function Home(){
     return (
         <>
         <Header/>
-          {/* {showAllFlats && <AllFlats />} Afișează AllFlats doar dacă showAllFlats este true */}
+          
         <div className="home__container">
            <h2 className="welcome__message" > Welcome to Flat Finder – Your Journey to the Perfect Home Starts Here! Whether you're looking for a cozy apartment or a spacious home, we're here to make the search simple and enjoyable.</h2>
      </div>
      <div className="motivational__message"> <h2 >
        No More Stressful Searches – Discover Your Ideal Living Space with Flat Finder!
        </h2></div>
-       {/* <div className="start__message">Start Now</div> */}
+
          <div>
                 <Toolbar>
                     <div className="start__message">Start Now</div>

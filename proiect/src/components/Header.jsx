@@ -4,7 +4,6 @@ import { doSignOut } from "../../auth";
 import { Button, Box, Typography } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
-
 import './Header.css';
 
 function Header() {
@@ -24,7 +23,7 @@ function Header() {
             case "/my-profiles":
                 return "My Profile";
                 case "/messages":
-                    return "Messages";
+                    return "My Messages";
              case "/all-users":
                 return "All Users";
             default:
@@ -40,6 +39,7 @@ function Header() {
 
             <h2 className='logo__name' >FlatFinder</h2>
           
+
             <div className="hello">
                 <Typography variant="body1" sx={{
                                 color:' #dcdcdc'
@@ -47,12 +47,15 @@ function Header() {
                     Hello, {currentUser?.email}
                 </Typography>
             </div>
+        
             <div> <Typography variant="h6" sx={{
                 textTransform:'uppercase', 
                     color:' #dcdcdc',
                     padding:'100px'
                 
             }}>{renderSwitch(location.pathname)}</Typography></div>
+     
+          
             <Box component="nav">
                 <div className="components__pagename">
                
@@ -71,11 +74,7 @@ function Header() {
                     backgroundColor:'black', color:'#dcdcdc'}
                             }} 
                             color="inherit" component={Link} to="/messages">Messages</Button>
-                    {/* <Button sx={{
-                                color:' #dcdcdc','&:hover':{
-                    backgroundColor:'black', color:'#dcdcdc'}
-                            }}
-                              color="inherit" component={Link} to="/all-users">All Users</Button>         */}
+             
                  {isAdmin && (
     <Link to="/all-users">
         <Button
@@ -117,7 +116,7 @@ function Header() {
                         
                     ) : (
                         <>
-                            {/* Additional buttons or content for unauthenticated users */}
+                           
                         </>
                     )}
                 </Box>   

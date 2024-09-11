@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { db } from "../../firebase";
-import { getDoc, doc, setDoc, getDocs, collection, deleteDoc, query, documentId,where, addDoc } from "firebase/firestore";
+import { getDoc, doc, setDoc, getDocs, collection, deleteDoc, addDoc } from "firebase/firestore";
 import { Box, TextField, IconButton, Modal, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Favorite, Send, FavoriteBorder } from '@mui/icons-material';

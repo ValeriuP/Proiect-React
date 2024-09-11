@@ -48,3 +48,45 @@
         transform: scale(1); /* Return to normal size */
     }
 }
+@media (max-width: 768px) {
+    body {
+        background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg"); /* Optional: Different image for tablets */
+        background-size: cover;
+        background-position: center;
+    }
+    .home__container {
+        width: 700px; /* Full width for smaller screens */
+        padding: 50px;
+    }
+    h2 {
+        font-size: 1rem; /* Even smaller font size for small screens */
+    }
+    .start__message {
+        font-size: 1.2rem;
+    }
+    .MuiButton-root {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-image: url("../assets/modern-apartment-building-features-green-facade-design-generated-by-ai-free-photo.jpg"); /* Optional: Different image for tablets */
+        background-size: cover;
+        background-position: center;
+    }
+    .home__container {
+        padding: 5px;
+    }
+    h2 {
+        font-size: 0.8rem; /* Font size for very small screens */
+    }
+    .start__message {
+        font-size: 1rem;
+    }
+    .MuiButton-root {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
