@@ -5,15 +5,17 @@ import {
 } from '@mui/material';
 import { Delete, Message, Reply } from '@mui/icons-material';
 import { db } from '../../firebase';
-import { collection, getDocs, deleteDoc, doc, query, where, addDoc, getDoc, Timestamp, updateDoc } from 'firebase/firestore';
+import { collection, getDocs,getFirestore, deleteDoc, doc, query, where, addDoc, getDoc, Timestamp, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../contexts/authContext';
 import Header from './Header';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { initializeApp } from 'firebase/app';
+
 
 
 function Messages(){
-    const {currentUser}=useAuth();
-    const [message,setMessage]=useState([])
+    const {currentUser}=useAuth();          // Obtine utilizatorul curent 
+    const [message,setMessage]=useState([])   // initializeaza starea messages
 
     useEffect( ()=>{
     console.log(currentUser.uid);
@@ -26,12 +28,62 @@ function Messages(){
             let doc = await  getDocs(messagesRef);
             let data = doc.docs.map(d=>({...d.data(),id:d.id}))
                 let mess_data = data.filter(d=>d.receiverId==currentUser.uid)
-                console.log(mess_data)  
+                setMessage(mess_data);
+                console.log(mess_data);
         }
         getData();
-    },[])
+    },[currentUser]);
 
+    return (
+        <div>
+            
+            <Header />
+            
+           
+            <Table sx={{
+                        marginBottom: 3,
+                        marginTop: 4,
+                        // width: '200px',
+                        borderRadius: 2,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        color: '#dcdcdc',
+                        '& .MuiOutlinedInput-root': {
+                            '&::placeholder': {
+                                color: '#dcdcdc',
+                                opacity: 1,
+                            },
+                        },
+                        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: 'transparent',
+                        },
+                    }}>
+                <TableHead  >
+                    
+                    <TableRow >
+                        <TableCell sx={{color:'#dcdcdc'}}>Sender</TableCell>
+                        <TableCell sx={{color:'#dcdcdc'}}>Message</TableCell>
+                        <TableCell sx={{color:'#dcdcdc'}}></TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {message.map((msg) => (
+                        <TableRow key={msg.id}>
+                            <TableCell sx={{color:'#dcdcdc'}}>{msg.senderId}</TableCell>
+                            <TableCell sx={{color:'#dcdcdc'}}>{msg.message}</TableCell>
+                            
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        
+
+            
+        </div>
+    )
+
+   
 }
+export default Messages ;
 
 // function Messages() {
 //     const { currentUser } = useAuth();
@@ -336,4 +388,4 @@ function Messages(){
 //     );
 // }
 
-export default Messages;
+// export default Messages;

@@ -100,6 +100,8 @@ function AllFlats() {
             message:message,
             senderId:currentUser.uid,
             receiverId:owner_id,
+            // email:currentUser.email,
+            
             
         })
         handleCloseModal();
