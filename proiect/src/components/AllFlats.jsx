@@ -8,6 +8,14 @@ import { Favorite, Send, FavoriteBorder } from '@mui/icons-material';
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import SendIcon from '@mui/icons-material/Send';
+// import * as React from 'react';
+// import useMediaQuery from '@mui/material/useMediaQuery';
+
+// export default function SimpleMediaQuery() {
+//     const matches = useMediaQuery('(min-width:600px)');
+  
+//     return <span>{`(min-width:600px) matches: ${matches}`}</span>;
+//   }
 
 function AllFlats() {
     const [flats, setFlats] = useState([]);
