@@ -38,7 +38,7 @@ function AllUsers() {
                     id: doc.id,
                     firstName: doc.data().firstName, // Preia prenumele
                     lastName: doc.data().lastName,   // Preia numele de familie
-                    email: doc.data().email,
+                    email: doc.data().email,         // preia email
                     // ...doc.data()
                 }));
                 setUsers(usersList);
@@ -73,7 +73,7 @@ function AllUsers() {
     };
 
     const columns = [
-        {field:'firstName', headerName:'First Name',width:350},
+        {field:'firstName', headerName:'First Name',width:350}, // afiseaza nume prenume email
         {field:'lastName',headerName: 'Last Name',width:250},
         { field: 'email', headerName: 'Email', width: 250 },
         
