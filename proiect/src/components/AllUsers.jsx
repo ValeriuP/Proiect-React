@@ -36,7 +36,10 @@ function AllUsers() {
                 const usersSnapshot = await getDocs(usersCollection);
                 const usersList = usersSnapshot.docs.map(doc => ({
                     id: doc.id,
-                    ...doc.data()
+                    firstName: doc.data().firstName, // Preia prenumele
+                    lastName: doc.data().lastName,   // Preia numele de familie
+                    email: doc.data().email,
+                    // ...doc.data()
                 }));
                 setUsers(usersList);
             } catch (error) {
@@ -70,7 +73,10 @@ function AllUsers() {
     };
 
     const columns = [
-        { field: 'email', headerName: 'Email', width: 550 },
+        {field:'firstName', headerName:'First Name',width:350},
+        {field:'lastName',headerName: 'Last Name',width:250},
+        { field: 'email', headerName: 'Email', width: 250 },
+        
         {
             field: 'actions',
             headerName: 'Actions',
