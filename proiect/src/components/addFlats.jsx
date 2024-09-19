@@ -1,15 +1,17 @@
-import {useState} from "react";
-import { useAuth } from "../contexts/authContext";
-import { useNavigate } from "react-router-dom";
-import { db } from "../../firebase";
-import { addDoc,collection } from "firebase/firestore";
-import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,Paper,ToggleButton,ToggleButtonGroup }  from "@mui/material";
-import { Link} from "react-router-dom";
-import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typography,Grid,Card } from "@mui/material";
+import {useState} from "react"; // Hook pentru gestionarea stării locale
+import { useAuth } from "../contexts/authContext"; // Context pentru autentificarea utilizatorului curent
+import { useNavigate } from "react-router-dom";// Hook pentru a naviga între rute
+import { db } from "../../firebase";// Importă baza de date Firebase
+import { addDoc,collection } from "firebase/firestore";// Funcții Firebase pentru a adăuga documente într-o colecție
+import { Button,Container,TextField,Table,TableBody,TableContainer,TableRow,TableCell,ToggleButton,ToggleButtonGroup } 
+ from "@mui/material";  // Importa componentele UI din Material-UI
+import { Link} from "react-router-dom";// Link pentru navigarea între pagini
+import { Typography } from "@mui/material";
 
 
 
     function AddFlat() {
+        // Starea locală pentru datele formularului apartamentului
         const [flatData, setFlatData] = useState({
             city: '',
             streetName: '',
@@ -22,13 +24,14 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
             ownerEmail: '',
             
         });
-        const { currentUser } = useAuth()
-    const [errors, setErrors] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const navigate = useNavigate();
+        const { currentUser } = useAuth() // Obține utilizatorul curent din contextul de autentificare
+    const [errors, setErrors] = useState({}); // Starea pentru gestionarea erorilor de validare
+    const [isFormValid, setIsFormValid] = useState(false); // Starea care indică dacă formularul este valid
+    const [isSubmitted, setIsSubmitted] = useState(false);// Starea pentru a marca dacă formularul a fost trimis
+    const navigate = useNavigate(); // Hook pentru navigare
+    //  validarea formularului
        const validate=()=>{
-        let temporarErrors={};
+        let temporarErrors={};// Obiect pentru erorile temporare
         temporarErrors.city = flatData.city ? "" : "City is required.";
         temporarErrors.streetName = flatData.streetName ? "" : "Street Name is required.";
         temporarErrors.streetNumber = flatData.streetNumber ? "" : "Street Number is required.";
@@ -39,33 +42,36 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
         temporarErrors.dateAvailable = flatData.dateAvailable ? "" : "Date Available is required.";
         
        
-        setErrors(temporarErrors);
-        return Object.values(temporarErrors).every(x=>x ==="");
+        setErrors(temporarErrors);// Actualizează starea erorilor
+        return Object.values(temporarErrors).every(x=>x ==="");// Verifică dacă nu există erori
     };
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFlatData(prevData => ({ ...prevData, [name]: value }));
+        const { name, value } = e.target;  // Extrage numele și valoarea din câmpul modificat
+        setFlatData(prevData => ({ ...prevData, [name]: value }));// Actualizează starea formularului cu noua valoare
     };
+    // Funcția pentru actualizarea datei disponibile
     const handleDateChange = (e) => {
-        setFlatData(prevData => ({ ...prevData, dateAvailable: e.target.value }));
+        setFlatData(prevData => ({ ...prevData, dateAvailable: e.target.value }));// Actualizează câmpul "dateAvailable"
     };
+    // Funcția pentru gestionarea selectării aerului condiționat
     const handleACChange = (e, newAC) => {
         if (newAC !== null) {
             setFlatData(prevData => ({ ...prevData, ac: newAC }));
         }
     };
+     // Funcția pentru trimiterea formularului
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitted(true);  
+        e.preventDefault();// Previne comportamentul implicit al formularului
+        setIsSubmitted(true);   // Marchează că formularul a fost trimis
     
         // Log flatData for debugging
         console.log("Flat data before validation:", flatData);
     
-        if (validate()) {
-            setIsFormValid(true);
+        if (validate()) {  // Verifică dacă formularul este valid
+            setIsFormValid(true);  // Marchează formularul ca valid
             try {
-                if (currentUser) {
-                    const flatData1 = { 
+                if (currentUser) {   // Dacă utilizatorul este autentificat
+                    const flatData1 = {   // Include datele din formular
                         ...flatData, 
                         ownerUid: currentUser.uid, // Save the user's UID
                         ownerEmail: currentUser.email // Automatically add the current user's email
@@ -73,24 +79,24 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
     
                     console.log("Flat data after adding user info:", flatData1);
     
-                    const flatsCollection = collection(db, 'flats');
-                    await addDoc(flatsCollection, flatData1);
+                    const flatsCollection = collection(db, 'flats'); // Referință la colecția "flats" din Firebase
+                    await addDoc(flatsCollection, flatData1);  // Adaugă documentul în Firebase
     
-                    console.log("Flat successfully added to Firestore!");
+                    console.log("Flat successfully added to Firestore!");  // confirma succesul
                 }
-                navigate('/all-flats');
+                navigate('/all-flats'); // Navighează la pagina cu toate apartamentele
             } catch (error) {
-                console.error("Error adding flat: ", error);
+                console.error("Error adding flat: ", error);  // eroare
             }
         } else {
-            setIsFormValid(false);
+            setIsFormValid(false);  // Marchează formularul ca invalid
             console.log("Validation failed:", errors);
         }
     };
     
     
     return (
-        
+        // Container principal pentru UI
     <Container sx={{ maxWidth: '100%', paddingTop: 15, display: 'flex', justifyContent: 'center', alignItems: 'start', minHeight: '100vh' }}>
     <TableContainer sx={{ width: '450px', padding: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
     <Typography variant="h5" sx={{ color: '#dcdcdc', display:'flex', justifyContent:'center', textTransform:'uppercase' }}>
@@ -304,4 +310,5 @@ import { Box,CardContent,Dialog,DialogActions,DialogContent,DialogTitle,Typograp
 
 
     }
-    export default AddFlat;
+    export default AddFlat; // Exportă componenta pentru a putea fi utilizată în alte părți ale aplicației
+
