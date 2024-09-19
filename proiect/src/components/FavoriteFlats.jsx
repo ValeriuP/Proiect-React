@@ -148,4 +148,4 @@ function FavoriteFlats() {
     );
 }
 
-export default FavoriteFlats;
+export default FavoriteFlats;

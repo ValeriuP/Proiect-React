@@ -120,14 +120,14 @@ function MyFlats() {
                             <Button
                                 color="primary"
                                 onClick={() => handleEdit(params.row)}
-                                sx={{ marginLeft: 1, color: '#007bff' }}
+                                sx={{ marginLeft: 1, color: '#dcdcdc' }}
                             >
                                 Edit
                             </Button>
                             <Button
                                 color="secondary"
                                 onClick={() => handleDelete(params.row.id)}
-                                sx={{ marginLeft: 1, color: '#9e1b32' }}
+                                sx={{  color: '#9e1b32' }}
                             >
                                 Delete
                             </Button>
@@ -142,7 +142,7 @@ function MyFlats() {
         <Box sx={{ padding: 2 }}>
             <Header />
 
-            <Box sx={{ marginTop: 2 }}>
+            <Box sx={{ marginTop: 15 }}>
                 <DataGrid
                     rows={flats}
                     columns={columns}

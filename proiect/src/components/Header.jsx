@@ -20,6 +20,10 @@ function Header() {
                 return "Home Page";
             case "/all-flats":
                 return "All Flats";
+                case "/my-flats":
+                return "My Flats";
+                case "/favorite-flats":
+                return "Favorite Flats";
             case "/my-profiles":
                 return "My Profile";
                 case "/messages":

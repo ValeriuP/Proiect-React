@@ -36,9 +36,7 @@
     align-items: center;
     
 }
-.burger-menu {
-    display: none; /* Hidden on larger screens */
-}
+
 @media (max-width: 768px) {
     /* Container remains in a row */
     body{
